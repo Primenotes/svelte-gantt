@@ -10,6 +10,7 @@ export class MomentSvelteGanttDateAdapter implements SvelteGanttDateAdapter {
     }
 
     format(date: number, format: string): string {
+        //alert('date format is called');
         return this.moment(date).format(format);
     }
 }
@@ -17,6 +18,7 @@ export class MomentSvelteGanttDateAdapter implements SvelteGanttDateAdapter {
 export class NoopSvelteGanttDateAdapter implements SvelteGanttDateAdapter {
     format(date: number, format: string): string {
         const d = new Date(date);
+        //alert('date switch is called');
         switch (format) {
             case 'H':
                 return d.getHours() + '';
@@ -56,6 +58,7 @@ export class NoopSvelteGanttDateAdapter implements SvelteGanttDateAdapter {
                 var month = d.toLocaleString('default', { month: 'short' });
                 return `${month.charAt(0).toUpperCase()}${month.substring(1)} ${d.getFullYear()}`;
             default:
+                
                 console.warn(`Date Format "${format}" is not supported, use another date adapter.`);
                 return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
         }
@@ -82,6 +85,12 @@ export function startOf(date: number, unit: string): number {
             return startOfDate(y, 0, 1);
         case 'month':
             return startOfDate(y, m, 1);
+        case 'week':
+            //alert('d' + y);
+            //alert('m' + m);
+            //alert('dt' + dt);
+            //alert('stardate' + startOfDate(y, m, dt - 7));
+            return startOfDate(y, m, dt);
         case 'd':
         case 'day':
             return startOfDate(y, m, dt);
@@ -116,6 +125,8 @@ export function getDuration(unit: string, offset = 1): number {
             return offset * 31536000000;
         case 'month':
             return offset * 30 * 24 * 60 * 60 * 1000; // incorrect since months are of different durations
+        case 'week':
+            return offset * 7 * 24 * 60 * 60 * 1000;
         case 'd':
         case 'day':
             return offset * 24 * 60 * 60 * 1000;

@@ -5,16 +5,16 @@
     import moment from 'moment';
     import GanttOptions from '../components/GanttOptions.svelte';
 
-    const currentStart = time('06:00');
-    const currentEnd = time('18:00');
+    const currentStart = new Date(new Date().setDate(new Date().getDate()-27));
+    const currentEnd = new Date(new Date().setDate(new Date().getDate()+400));
 
     export const data = {
         rows: [{
             id: 1,
-            label: "Accounting",
+            label: "AccountingsX"
         }, {
             id: 2,
-            label: "Business Development",
+            label: "Business DevelopmentS"
         }, {
             id: 3,
             label: "Ida Flewan"
@@ -24,84 +24,156 @@
         }, {
             id: 5,
             label: "Ange Kembry"
-        }],
-        tasks: [{
-            id: 3,
-            resourceId: 1,
-            label: "PET-CT",
-            from: time("13:30"),
-            to: time("15:00"),
-            classes: "orange"
-        }, {
-            id: 4,
-            resourceId: 1,
-            label: "Auditing",
-            from: time("9:30"),
-            to: time("11:30"),
-            classes: "orange"
-        }, {
-            id: 5,
-            resourceId: 2,
-            label: "Security Clearance",
-            from: time("15:15"),
-            to: time("16:00"),
-            classes: "green"
         }, {
             id: 6,
-            resourceId: 2,
-            label: "Policy Analysis",
-            from: time("14:00"),
-            to: time("17:00"),
-            classes: "blue"
+            label: "Business DevelopmentS"
         }, {
             id: 7,
-            resourceId: 2,
-            label: "Xbox 360",
-            from: time("13:00"),
-            to: time("14:00"),
-            classes: "blue"
+            label: "Ida Flewan"
         }, {
             id: 8,
-            resourceId: 3,
-            label: "GNU/Linux",
-            from: time("14:00"),
-            to: time("15:30"),
-            classes: "blue"
+            label: "Lauréna Shrigley"
         }, {
             id: 9,
-            resourceId: 4,
-            label: "Electronic Trading",
-            from: time("15:00"),
-            to: time("17:00"),
-            classes: "green"
+            label: "Ange Kembry"
         }, {
             id: 10,
-            resourceId: 5,
-            label: "Alternative Medicine",
-            from: time("14:30"),
-            to: time("15:30"),
-            classes: "orange"
+            label: "Business DevelopmentS"
+        }, {
+            id: 11,
+            label: "Ida Flewan"
+        }, {
+            id: 12,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 13,
+            label: "Ange Kembry"
+        }, {
+            id: 14,
+            label: "Business DevelopmentS"
+        }, {
+            id: 15,
+            label: "Ida Flewan"
+        }, {
+            id: 16,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 17,
+            label: "Ange Kembry"
+        }, {
+            id: 18,
+            label: "Business DevelopmentS"
+        }, {
+            id: 19,
+            label: "Ida Flewan"
+        }, {
+            id: 20,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 21,
+            label: "Ange Kembry"
+        }, {
+            id: 22,
+            label: "Business DevelopmentS"
+        }, {
+            id: 23,
+            label: "Ida Flewan"
+        }, {
+            id: 24,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 25,
+            label: "Ange Kembry"
+        }, {
+            id: 26,
+            label: "Business DevelopmentS"
+        }, {
+            id: 27,
+            label: "Ida Flewan"
+        }, {
+            id: 28,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 29,
+            label: "Ange Kembry"
+        }, {
+            id: 30,
+            label: "Business DevelopmentS"
+        }, {
+            id: 31,
+            label: "Ida Flewan"
+        }, {
+            id: 32,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 33,
+            label: "Ange Kembrxy"
+        }, {
+            id: 34,
+            label: "Ange Kembrxy"
+        }, {
+            id: 35,
+            label: "Business DevelopmentS"
+        }, {
+            id: 36,
+            label: "Ida Flewan"
+        }, {
+            id: 37,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 38,
+            label: "Ange Kembry"
+        }, {
+            id: 39,
+            label: "Business DevelopmentS"
+        }, {
+            id: 40,
+            label: "Ida Flewan"
+        }, {
+            id: 41,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 42,
+            label: "Ange Kembry"
+        }, {
+            id: 43,
+            label: "Business DevelopmentS"
+        }, {
+            id: 44,
+            label: "Ida Flewan"
+        }, {
+            id: 45,
+            label: "Lauréna Shrigley"
+        }, {
+            id: 46,
+            label: "Ange Kembry"
+        }, {
+            id: 47,
+            label: "Business DevelopmentS"
         }],
+        tasks: [{ id: 1,resourceId: 1,label: 'PET-CT', from: new Date(new Date().setDate(new Date().getDate()-5)), to: new Date(new Date().setDate(new Date().getDate()+10)), classes: 'orange' }],
         dependencies: []
     }
 
     let options = {
+        fitWidth: false,
+        columnUnit: 'day',
         dateAdapter: new MomentSvelteGanttDateAdapter(moment),
         rows: data.rows,
         tasks: data.tasks,
         dependencies: data.dependencies,
         timeRanges: [],
-        columnOffset: 15,
-        magnetOffset: 15,
-        rowHeight: 52,
-        rowPadding: 6,
-        headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'hour', format: 'H:mm' }],
-        fitWidth: true,
-        minWidth: 800,
+        columnOffset: 1,
+        magnetUnit: 'day',
+        magnetOffset: 1,
+        rowHeight: 20,
+        rowPadding: 5,
+        headers: [{ unit: 'month', format: 'M', sticky: true }, { unit: 'week', format: 'W', sticky: true }, { unit: 'day', format: 'D', sticky: true }], //headers: [{ unit: 'month', format: 'M Y', sticky: true }, { unit: 'week', format: 'w', sticky: true }],
+        minWidth: 8000,
         from: currentStart,
         to: currentEnd,
         tableHeaders: [{ title: 'Label', property: 'label', width: 140, type: 'tree' }],
-        tableWidth: 240,
+        tableWidth: 200,
         ganttTableModules: [SvelteGanttTable],
         ganttBodyModules: [SvelteGanttDependencies],
         taskElementHook: (node, task) => {
@@ -142,7 +214,7 @@
         //gantt.api.tasks.on.moveEnd((task) => console.log('Listener: task move end', task));
         gantt.api.tasks.on.change(([data]) => console.log('Listener: task change', data));
         gantt.api.tasks.on.changed((task) => console.log('Listener: task changed', task));
-        gantt.api.tasks.on.dblclicked((task) => console.log('Listener: task double clicked', task));
+        gantt.api.tasks.on.dblclicked((task) => alert('Listener: task double clicked', task));
     });
 
     function createPopup(task, node) {

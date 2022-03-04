@@ -8,14 +8,14 @@
     const currentStart = time('06:00');
     const currentEnd = time('18:00');
 
-    const colors = ['blue', 'green', 'orange']
+    const colors = ['blue', 'green', 'orange','red']
     
     let options2 = getContext('options');
 
     export const data = {
         rows: [{
             id: 1,
-            label: "Accounting",
+            label: "AccountingS",
         }, {
             id: 2,
             label: "Business Development",
@@ -32,7 +32,7 @@
         tasks: [{
             id: 3,
             resourceId: 1,
-            label: "PET-CT",
+            label: "AK 503",
             from: time("13:30"),
             to: time("15:00"),
             classes: "orange"
@@ -42,7 +42,7 @@
             label: "Auditing",
             from: time("9:30"),
             to: time("11:30"),
-            classes: "orange"
+            classes: "red"
         }, {
             id: 5,
             resourceId: 2,
@@ -70,7 +70,7 @@
             label: "GNU/Linux",
             from: time("14:00"),
             to: time("15:30"),
-            classes: "blue"
+            classes: "orange"
         }, {
             id: 9,
             resourceId: 4,
@@ -96,10 +96,10 @@
         dependencies: data.dependencies,
         timeRanges: [],
         columnOffset: 15,
-        magnetOffset: 15,
+        magnetOffset: 150,
         rowHeight: 52,
         rowPadding: 6,
-        headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'hour', format: 'H:mm' }],
+        headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'day', format: 'MMMM Do' }],
         fitWidth: true,
         minWidth: 800,
         from: currentStart,
@@ -117,10 +117,10 @@
             gantt,
             onsuccess: (row, date, gantt) => {
                 console.log(row.model.id, new Date(date).toISOString())
-                const id = 5000 + Math.floor(Math.random() * 1000);
+                const id = 5000 + Math.floor(Math.random() * 1000); //Ubound all id's!!
                 gantt.updateTask({
                     id,
-                    label: `Task #${id}`,
+                    label: `Neues Element_${id}`,
                     from: date,
                     to: date + 3 * 60 * 60 * 1000,
                     classes: colors[(Math.random() * colors.length) | 0],
@@ -129,7 +129,7 @@
             },
             elementContent: () => {
                 const element = document.createElement('div');
-                element.innerHTML = 'New Task';
+                element.innerHTML = 'Neues Element';
                 element.className = 'sg-external-indicator';
                 return element;
             }
@@ -170,6 +170,6 @@
 
 <div class="container">
     <div id="example-gantt"></div>
-    <div id="new-task">Drag to gantt</div>
+    <div id="new-task">Neues Element</div>
     <GanttOptions options={options} on:change={onChangeOptions}/>
 </div>

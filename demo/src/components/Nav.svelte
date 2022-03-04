@@ -17,7 +17,7 @@
         onUpdateOptions({
             fitWidth: true,
             columnUnit: 'minute',
-            columnOffset: 15,
+            //columnOffset: 15,
             from: currentStart,
             to: currentEnd,
             minWidth: 1000,
@@ -29,12 +29,12 @@
         console.log('week view set');
         onUpdateOptions({
             fitWidth: false,
-            columnUnit: 'hour',
+            columnUnit: 'day',
             columnOffset: 1,
-            from: currentStart.clone().startOf('week'),
-            to: currentStart.clone().endOf('week'),
-            minWidth: 5000,
-            headers: [{ unit: 'month', format: 'MMMM YYYY', sticky: true }, { unit: 'day', format: 'ddd DD', sticky: true }]
+            from: new Date(new Date().setDate(new Date().getDate()-7)),
+            to: new Date(new Date().setDate(new Date().getDate()+90)),
+            minWidth: 3000,
+            headers: [{ unit: 'day', format: 'DD', sticky: true }, { unit: 'day', format: 'DD', sticky: true }]
         });
     };
 

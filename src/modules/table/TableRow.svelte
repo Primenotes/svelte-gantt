@@ -85,7 +85,7 @@
 
     .sg-table-body-cell {
         border-bottom: #efefef 1px solid;
-        background-color: #fff;
+        background-color: rgb(255, 255, 255);
         font-weight: bold;
     }
 

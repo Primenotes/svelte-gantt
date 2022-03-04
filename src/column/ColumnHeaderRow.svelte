@@ -17,12 +17,14 @@
     $: {
         header.duration = getDuration(header.unit, header.offset);
         const duration = header.duration;
+        //alert(baseDuration);
         const ratio = duration / baseDuration;
         columnWidth = baseWidth * ratio;
     }
 
     export let columnCount;
     $: {
+        //alert('width' + JSON.stringify(width));
         columnCount = Math.ceil($width / columnWidth);
         if(!isFinite(columnCount)){
             console.error('columnCount is not finite');
@@ -33,6 +35,7 @@
     let _headers = [];
     $: {
         const headers = [];
+        //alert(startOf($from, header.unit));
         let headerTime = startOf($from, header.unit);
 
         for(let i = 0; i < columnCount; i++){
@@ -46,7 +49,9 @@
             headerTime += header.duration;
         }
         _headers = headers;
+        alert('x' + JSON.stringify(_headers));    
     }
+    
 </script>
 
 <div class="column-header-row">

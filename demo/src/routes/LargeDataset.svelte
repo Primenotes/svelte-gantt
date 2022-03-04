@@ -8,8 +8,8 @@
     const currentStart = time('06:00');
     const currentEnd = time('18:00');
     let generation = 0;
-    let rowCount = 100;
-    const colors = ['blue', 'green', 'orange']
+    let rowCount = 10000;
+    const colors = ['red', 'blue', 'orange']
 
     const timeRanges = [
         {

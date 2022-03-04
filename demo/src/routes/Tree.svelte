@@ -33,7 +33,7 @@
     export const data = {
         rows: [{
             id: 10,
-            label: "Accounting",
+            label: "AccountingS",
             class: 'row-group',
             iconClass: 'fas fa-calculator',
             children: [{

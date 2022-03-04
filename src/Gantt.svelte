@@ -99,8 +99,8 @@
     
     export let dateAdapter: SvelteGanttDateAdapter = new NoopSvelteGanttDateAdapter();
 
-    export let magnetUnit = 'minute';
-    export let magnetOffset = 15;
+    export let magnetUnit = 'day';
+    export let magnetOffset = 1;
     let magnetDuration;
     $: setMagnetDuration(magnetUnit, magnetOffset);
     setMagnetDuration(magnetUnit, magnetOffset);
@@ -111,8 +111,8 @@
         }
     }
 
-    export let columnUnit = 'minute';
-    export let columnOffset = 15;
+    export let columnUnit = 'day';
+    export let columnOffset = 7;
     let columnDuration;
     $: setColumnDuration(columnUnit, columnOffset);
     setColumnDuration(columnUnit, columnOffset);

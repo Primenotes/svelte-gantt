@@ -18,22 +18,27 @@
     $: {
         let result = null; 
         let minDuration = null;
+        
 
         [...headers, {unit: columnUnit, offset: columnOffset}].forEach(header => {
             
             const duration = header.duration = header.duration || getDuration(header.unit, header.offset);
+            //alert('duration ' + duration);
             if(duration < minDuration || minDuration === null) {
                 minDuration = duration;
                 result = header;
             }
+            //alert(JSON.stringify([...headers, {unit: columnUnit, offset: columnOffset}]));
         });
 
         minHeader = result;
+        
     }
 
     let baseHeaderWidth;
     $: {
         baseHeaderWidth = getPositionByDate($from + minHeader.duration, $from, $to, $width) | 0;
+        //alert('baseHeaderWidth' + baseHeaderWidth);
         if(baseHeaderWidth <= 0)
             console.error('baseHeaderWidth is invalid, columns or headers might be too short for the current view.');
     }
@@ -41,7 +46,13 @@
     let baseHeaderDuration;
     $: {
         baseHeaderDuration = minHeader.duration;
+        //alert('baseHeaderDuration' + baseHeaderDuration);
     }
+
+    //alert('headers' + JSON.stringify(headers));  
+    
+    
+
 </script>
 
 {#each headers as header}

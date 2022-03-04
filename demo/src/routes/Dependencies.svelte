@@ -30,7 +30,7 @@
     export const data = {
         rows: [{
             "id": 1,
-            "label": "Preparation and Planning"
+            "label": "Preparation and PlanningXCX"
         }, {
             "id": 2,
             "label": "Development"
