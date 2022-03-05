@@ -71,7 +71,7 @@ var app = (function () {
             slot.p(slot_context, slot_changes);
         }
     }
-    function get_all_dirty_from_scope($$scope) {
+    function get_all_dirty_from_scope$1($$scope) {
         if ($$scope.ctx.length > 32) {
             const dirty = [];
             const length = $$scope.ctx.length / 32;
@@ -6661,7 +6661,7 @@ var app = (function () {
     						ctx,
     						/*$$scope*/ ctx[8],
     						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[8])
+    						? get_all_dirty_from_scope$1(/*$$scope*/ ctx[8])
     						: get_slot_changes$1(default_slot_template, /*$$scope*/ ctx[8], dirty, null),
     						null
     					);
@@ -6955,7 +6955,7 @@ var app = (function () {
     						ctx,
     						/*$$scope*/ ctx[9],
     						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[9])
+    						? get_all_dirty_from_scope$1(/*$$scope*/ ctx[9])
     						: get_slot_changes$1(default_slot_template, /*$$scope*/ ctx[9], dirty, get_default_slot_changes),
     						get_default_slot_context
     					);
@@ -7462,6 +7462,14 @@ var app = (function () {
     function safe_not_equal(a, b) {
         return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
     }
+    let src_url_equal_anchor;
+    function src_url_equal(element_src, url) {
+        if (!src_url_equal_anchor) {
+            src_url_equal_anchor = document.createElement('a');
+        }
+        src_url_equal_anchor.href = url;
+        return element_src === src_url_equal_anchor.href;
+    }
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
@@ -7515,9 +7523,16 @@ var app = (function () {
             slot.p(slot_context, slot_changes);
         }
     }
-    function update_slot(slot, slot_definition, ctx, $$scope, dirty, get_slot_changes_fn, get_slot_context_fn) {
-        const slot_changes = get_slot_changes(slot_definition, $$scope, dirty, get_slot_changes_fn);
-        update_slot_base(slot, slot_definition, ctx, $$scope, slot_changes, get_slot_context_fn);
+    function get_all_dirty_from_scope($$scope) {
+        if ($$scope.ctx.length > 32) {
+            const dirty = [];
+            const length = $$scope.ctx.length / 32;
+            for (let i = 0; i < length; i++) {
+                dirty[i] = -1;
+            }
+            return dirty;
+        }
+        return -1;
     }
     function exclude_internal_props(props) {
         const result = {};
@@ -8629,10 +8644,10 @@ var app = (function () {
       }
     }
 
-    var css_248z = ".sg-label-bottom.svelte-6qjqhr{position:absolute;top:calc(100% + 10px);color:#888}.debug.svelte-6qjqhr{position:absolute;top:-10px;right:0;font-size:8px;color:black}.sg-task.svelte-6qjqhr{position:absolute;white-space:nowrap;transition:background-color 0.2s, opacity 0.2s;pointer-events:all}.sg-task{background:rgb(116, 191, 255)}.sg-task-background.svelte-6qjqhr{position:absolute;height:100%;top:0}.sg-task-content.svelte-6qjqhr{position:absolute;height:100%;top:0;padding-left:14px;font-size:14px;display:flex;align-items:center;justify-content:flex-start}.sg-task.svelte-6qjqhr:not(.moving){transition:transform 0.2s, background-color 0.2s, width 0.2s}.sg-task.moving.svelte-6qjqhr{z-index:1;opacity:0.5}.sg-task.svelte-6qjqhr:hover::before{content:\"\";width:4px;height:50%;top:25%;position:absolute;cursor:ew-resize;border-style:solid;border-color:rgba(255, 255, 255, 0.5);margin-left:3px;left:0;border-width:0 1px;z-index:1}.sg-task.svelte-6qjqhr:hover::after{content:\"\";width:4px;height:50%;top:25%;position:absolute;cursor:ew-resize;border-style:solid;border-color:rgba(255, 255, 255, 0.5);margin-right:3px;right:0;border-width:0 1px;z-index:1}.sg-task.selected.svelte-6qjqhr{outline:2px solid rgba(3, 169, 244, 0.5);outline-offset:3px;z-index:1}.sg-task-reflected.svelte-6qjqhr{opacity:0.5}.sg-task-background.svelte-6qjqhr{background:rgba(0, 0, 0, 0.2)}.sg-task{color:white;background:rgb(116, 191, 255)}.sg-task:hover{background:rgb(98, 161, 216)}.sg-task.selected{background:rgb(69, 112, 150)}";
+    var css_248z = ".sg-label-bottom.svelte-naer5z{position:absolute;top:calc(100% + 10px);color:#888}.debug.svelte-naer5z{position:absolute;top:-10px;right:0;font-size:8px;color:black}.sg-task.svelte-naer5z{position:absolute;white-space:nowrap;transition:background-color 0.2s, opacity 0.2s;pointer-events:all}.sg-task{background:rgb(116, 191, 255)}.sg-task-background.svelte-naer5z{position:absolute;height:100%;top:0}.sg-task-content.svelte-naer5z{position:absolute;height:100%;top:0;padding-left:14px;font-size:14px;display:flex;align-items:center;justify-content:flex-start}.sg-task.svelte-naer5z:not(.moving){transition:transform 0.2s, background-color 0.2s, width 0.2s}.sg-task.moving.svelte-naer5z{z-index:1;opacity:0.5}.sg-task.svelte-naer5z:hover::before{content:\"\";width:4px;height:50%;top:25%;position:absolute;cursor:ew-resize;border-style:solid;border-color:rgba(255, 255, 255, 0.5);margin-left:3px;left:0;border-width:0 1px;z-index:1}.sg-task.svelte-naer5z:hover::after{content:\"\";width:4px;height:50%;top:25%;position:absolute;cursor:ew-resize;border-style:solid;border-color:rgba(255, 255, 255, 0.5);margin-right:3px;right:0;border-width:0 1px;z-index:1}.sg-task.selected.svelte-naer5z{outline:2px solid rgba(3, 169, 244, 0.5);outline-offset:3px;z-index:1}.sg-task-reflected.svelte-naer5z{opacity:0.5}.sg-task-background.svelte-naer5z{background:rgba(0, 0, 0, 0.2)}.sg-task{color:white;background:rgb(116, 191, 255)}.sg-task:hover{background:rgb(98, 161, 216)}.sg-task.selected{background:rgb(69, 112, 150)}";
     styleInject(css_248z);
 
-    /* src\entities\Task.svelte generated by Svelte v3.23.0 */
+    /* src\entities\Task.svelte generated by Svelte v3.46.4 */
 
     function create_if_block_4(ctx) {
     	let div;
@@ -8640,7 +8655,7 @@ var app = (function () {
     	return {
     		c() {
     			div = element("div");
-    			attr(div, "class", "sg-task-background svelte-6qjqhr");
+    			attr(div, "class", "sg-task-background svelte-naer5z");
     			set_style(div, "width", /*model*/ ctx[0].amountDone + "%");
     		},
     		m(target, anchor) {
@@ -8682,18 +8697,23 @@ var app = (function () {
     function create_if_block_3(ctx) {
     	let html_tag;
     	let raw_value = /*taskContent*/ ctx[8](/*model*/ ctx[0]) + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(null);
+    			html_tag = new HtmlTag();
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
     			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*model*/ 1 && raw_value !== (raw_value = /*taskContent*/ ctx[8](/*model*/ ctx[0]) + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
@@ -8703,18 +8723,23 @@ var app = (function () {
     function create_if_block_2(ctx) {
     	let html_tag;
     	let raw_value = /*model*/ ctx[0].html + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(null);
+    			html_tag = new HtmlTag();
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
     			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*model*/ 1 && raw_value !== (raw_value = /*model*/ ctx[0].html + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
@@ -8731,7 +8756,7 @@ var app = (function () {
     	return {
     		c() {
     			span = element("span");
-    			attr(span, "class", span_class_value = "sg-task-button " + /*model*/ ctx[0].buttonClasses + " svelte-6qjqhr");
+    			attr(span, "class", span_class_value = "sg-task-button " + /*model*/ ctx[0].buttonClasses + " svelte-naer5z");
     		},
     		m(target, anchor) {
     			insert(target, span, anchor);
@@ -8744,7 +8769,7 @@ var app = (function () {
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*model*/ 1 && raw_value !== (raw_value = /*model*/ ctx[0].buttonHtml + "")) span.innerHTML = raw_value;
-    			if (dirty[0] & /*model*/ 1 && span_class_value !== (span_class_value = "sg-task-button " + /*model*/ ctx[0].buttonClasses + " svelte-6qjqhr")) {
+    			if (dirty[0] & /*model*/ 1 && span_class_value !== (span_class_value = "sg-task-button " + /*model*/ ctx[0].buttonClasses + " svelte-naer5z")) {
     				attr(span, "class", span_class_value);
     			}
     		},
@@ -8766,7 +8791,7 @@ var app = (function () {
     		c() {
     			label = element("label");
     			t = text(t_value);
-    			attr(label, "class", "sg-label-bottom svelte-6qjqhr");
+    			attr(label, "class", "sg-label-bottom svelte-naer5z");
     		},
     		m(target, anchor) {
     			insert(target, label, anchor);
@@ -8816,9 +8841,9 @@ var app = (function () {
     			if (if_block2) if_block2.c();
     			t2 = space();
     			if (if_block3) if_block3.c();
-    			attr(div0, "class", "sg-task-content svelte-6qjqhr");
+    			attr(div0, "class", "sg-task-content svelte-naer5z");
     			attr(div1, "data-task-id", div1_data_task_id_value = /*model*/ ctx[0].id);
-    			attr(div1, "class", div1_class_value = "sg-task " + /*model*/ ctx[0].classes + " svelte-6qjqhr");
+    			attr(div1, "class", div1_class_value = "sg-task " + /*model*/ ctx[0].classes + " svelte-naer5z");
     			set_style(div1, "width", /*_position*/ ctx[6].width + "px");
     			set_style(div1, "height", /*height*/ ctx[1] + "px");
     			set_style(div1, "transform", "translate(" + /*_position*/ ctx[6].x + "px, " + /*_position*/ ctx[6].y + "px)");
@@ -8840,7 +8865,7 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen(div1, "dblclick", /*dblclick_handler*/ ctx[34]),
+    					listen(div1, "dblclick", /*dblclick_handler*/ ctx[19]),
     					action_destroyer(ctx[11].call(null, div1)),
     					action_destroyer(taskElement_action = /*taskElement*/ ctx[12].call(null, div1, /*model*/ ctx[0]))
     				];
@@ -8904,7 +8929,7 @@ var app = (function () {
     				attr(div1, "data-task-id", div1_data_task_id_value);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && div1_class_value !== (div1_class_value = "sg-task " + /*model*/ ctx[0].classes + " svelte-6qjqhr")) {
+    			if (dirty[0] & /*model*/ 1 && div1_class_value !== (div1_class_value = "sg-task " + /*model*/ ctx[0].classes + " svelte-naer5z")) {
     				attr(div1, "class", div1_class_value);
     			}
 
@@ -8956,11 +8981,11 @@ var app = (function () {
 
     function instance$8($$self, $$props, $$invalidate) {
     	let $rowStore;
-    	let $taskStore;
-    	let $rowPadding;
     	let $selection;
-    	component_subscribe($$self, rowStore, $$value => $$invalidate(18, $rowStore = $$value));
-    	component_subscribe($$self, taskStore, $$value => $$invalidate(19, $taskStore = $$value));
+    	let $rowPadding;
+    	let $taskStore;
+    	component_subscribe($$self, rowStore, $$value => $$invalidate(17, $rowStore = $$value));
+    	component_subscribe($$self, taskStore, $$value => $$invalidate(22, $taskStore = $$value));
     	let { model } = $$props;
     	let { height } = $$props;
     	let { left } = $$props;
@@ -8979,11 +9004,11 @@ var app = (function () {
     		} // should NOT animate on resize/update of columns
     	}
 
-    	const { dimensionsChanged } = getContext("dimensions");
-    	const { rowContainer } = getContext("gantt");
-    	const { taskContent, resizeHandleWidth, rowPadding, onTaskButtonClick, reflectOnParentRows, reflectOnChildRows, taskElementHook } = getContext("options");
-    	component_subscribe($$self, rowPadding, value => $$invalidate(20, $rowPadding = value));
-    	const { dndManager, api, utils, selectionManager, columnService } = getContext("services");
+    	getContext('dimensions');
+    	const { rowContainer } = getContext('gantt');
+    	const { taskContent, resizeHandleWidth, rowPadding, onTaskButtonClick, reflectOnParentRows, reflectOnChildRows, taskElementHook } = getContext('options');
+    	component_subscribe($$self, rowPadding, value => $$invalidate(21, $rowPadding = value));
+    	const { dndManager, api, utils, selectionManager, columnService } = getContext('services');
 
     	function drag(node) {
     		const ondrop = event => {
@@ -9123,7 +9148,7 @@ var app = (function () {
     	}
 
     	let selection = selectionManager.selection;
-    	component_subscribe($$self, selection, value => $$invalidate(21, $selection = value));
+    	component_subscribe($$self, selection, value => $$invalidate(18, $selection = value));
     	let selected = false;
     	let row;
 
@@ -9131,13 +9156,13 @@ var app = (function () {
     		api.tasks.raise.dblclicked(model);
     	};
 
-    	$$self.$set = $$props => {
-    		if ("model" in $$props) $$invalidate(0, model = $$props.model);
-    		if ("height" in $$props) $$invalidate(1, height = $$props.height);
-    		if ("left" in $$props) $$invalidate(14, left = $$props.left);
-    		if ("top" in $$props) $$invalidate(15, top = $$props.top);
-    		if ("width" in $$props) $$invalidate(16, width = $$props.width);
-    		if ("reflected" in $$props) $$invalidate(2, reflected = $$props.reflected);
+    	$$self.$$set = $$props => {
+    		if ('model' in $$props) $$invalidate(0, model = $$props.model);
+    		if ('height' in $$props) $$invalidate(1, height = $$props.height);
+    		if ('left' in $$props) $$invalidate(14, left = $$props.left);
+    		if ('top' in $$props) $$invalidate(15, top = $$props.top);
+    		if ('width' in $$props) $$invalidate(16, width = $$props.width);
+    		if ('reflected' in $$props) $$invalidate(2, reflected = $$props.reflected);
     	};
 
     	$$self.$$.update = () => {
@@ -9145,11 +9170,11 @@ var app = (function () {
     			 updatePosition(left, top, width);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$selection, model*/ 2097153) {
+    		if ($$self.$$.dirty[0] & /*$selection, model*/ 262145) {
     			 $$invalidate(7, selected = $selection.indexOf(model.id) !== -1);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$rowStore, model*/ 262145) {
+    		if ($$self.$$.dirty[0] & /*$rowStore, model*/ 131073) {
     			 row = $rowStore.entities[model.resourceId];
     		}
     	};
@@ -9172,23 +9197,8 @@ var app = (function () {
     		left,
     		top,
     		width,
-    		row,
     		$rowStore,
-    		$taskStore,
-    		$rowPadding,
     		$selection,
-    		updatePosition,
-    		dimensionsChanged,
-    		rowContainer,
-    		resizeHandleWidth,
-    		onTaskButtonClick,
-    		reflectOnParentRows,
-    		reflectOnChildRows,
-    		taskElementHook,
-    		dndManager,
-    		utils,
-    		selectionManager,
-    		columnService,
     		dblclick_handler
     	];
     }
@@ -9212,6 +9222,7 @@ var app = (function () {
     				reflected: 2,
     				onclick: 3
     			},
+    			null,
     			[-1, -1]
     		);
     	}
@@ -9221,26 +9232,31 @@ var app = (function () {
     	}
     }
 
-    var css_248z$1 = ".sg-row.svelte-ejtbeo{position:relative;width:100%;box-sizing:border-box}";
+    var css_248z$1 = ".sg-row.svelte-7u5y5s{position:relative;width:100%;box-sizing:border-box}";
     styleInject(css_248z$1);
 
-    /* src\entities\Row.svelte generated by Svelte v3.23.0 */
+    /* src\entities\Row.svelte generated by Svelte v3.46.4 */
 
     function create_if_block$1$1(ctx) {
     	let html_tag;
     	let raw_value = /*row*/ ctx[0].model.contentHtml + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(null);
+    			html_tag = new HtmlTag();
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
     			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty & /*row*/ 1 && raw_value !== (raw_value = /*row*/ ctx[0].model.contentHtml + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
@@ -9256,7 +9272,7 @@ var app = (function () {
     		c() {
     			div = element("div");
     			if (if_block) if_block.c();
-    			attr(div, "class", div_class_value = "sg-row " + /*row*/ ctx[0].model.classes + " svelte-ejtbeo");
+    			attr(div, "class", div_class_value = "sg-row " + /*row*/ ctx[0].model.classes + " svelte-7u5y5s");
     			attr(div, "data-row-id", div_data_row_id_value = /*row*/ ctx[0].model.id);
     			set_style(div, "height", /*$rowHeight*/ ctx[3] + "px");
     			toggle_class(div, "sg-hover", /*$hoveredRow*/ ctx[1] == /*row*/ ctx[0].model.id);
@@ -9280,7 +9296,7 @@ var app = (function () {
     				if_block = null;
     			}
 
-    			if (dirty & /*row*/ 1 && div_class_value !== (div_class_value = "sg-row " + /*row*/ ctx[0].model.classes + " svelte-ejtbeo")) {
+    			if (dirty & /*row*/ 1 && div_class_value !== (div_class_value = "sg-row " + /*row*/ ctx[0].model.classes + " svelte-7u5y5s")) {
     				attr(div, "class", div_class_value);
     			}
 
@@ -9313,16 +9329,15 @@ var app = (function () {
     	let $hoveredRow;
     	let $selectedRow;
     	let $rowHeight;
-    	
     	let { row } = $$props;
-    	const { rowHeight } = getContext("options");
+    	const { rowHeight } = getContext('options');
     	component_subscribe($$self, rowHeight, value => $$invalidate(3, $rowHeight = value));
-    	const { hoveredRow, selectedRow } = getContext("gantt");
+    	const { hoveredRow, selectedRow } = getContext('gantt');
     	component_subscribe($$self, hoveredRow, value => $$invalidate(1, $hoveredRow = value));
     	component_subscribe($$self, selectedRow, value => $$invalidate(2, $selectedRow = value));
 
-    	$$self.$set = $$props => {
-    		if ("row" in $$props) $$invalidate(0, row = $$props.row);
+    	$$self.$$set = $$props => {
+    		if ('row' in $$props) $$invalidate(0, row = $$props.row);
     	};
 
     	return [row, $hoveredRow, $selectedRow, $rowHeight, rowHeight, hoveredRow, selectedRow];
@@ -9335,13 +9350,13 @@ var app = (function () {
     	}
     }
 
-    var css_248z$2 = ".sg-milestone.svelte-fuyhwd.svelte-fuyhwd{position:absolute;top:0;bottom:0;white-space:nowrap;height:20px;width:20px;min-width:40px;margin-left:-20px;display:flex;align-items:center;flex-direction:column;transition:background-color 0.2s, opacity 0.2s}.sg-milestone.svelte-fuyhwd .inside.svelte-fuyhwd{position:relative}.sg-milestone.svelte-fuyhwd .inside.svelte-fuyhwd:before{position:absolute;top:0;left:0;content:' ';height:28px;width:28px;transform-origin:0 0;transform:rotate(45deg);background-color:#feac31;border-color:#feac31}.sg-milestone.svelte-fuyhwd.svelte-fuyhwd:not(.moving){transition:transform 0.2s, background-color 0.2s, width 0.2s}.sg-milestone.moving.svelte-fuyhwd.svelte-fuyhwd{z-index:1}.sg-milestone.selected.svelte-fuyhwd.svelte-fuyhwd{outline:2px solid rgba(3, 169, 244, 0.5);outline-offset:3px;z-index:1}";
+    var css_248z$2 = ".sg-milestone.svelte-10k3w4l.svelte-10k3w4l{position:absolute;top:0;bottom:0;white-space:nowrap;height:20px;width:20px;min-width:40px;margin-left:-20px;display:flex;align-items:center;flex-direction:column;transition:background-color 0.2s, opacity 0.2s}.sg-milestone.svelte-10k3w4l .inside.svelte-10k3w4l{position:relative}.sg-milestone.svelte-10k3w4l .inside.svelte-10k3w4l:before{position:absolute;top:0;left:0;content:' ';height:28px;width:28px;transform-origin:0 0;transform:rotate(45deg);background-color:#feac31;border-color:#feac31}.sg-milestone.svelte-10k3w4l.svelte-10k3w4l:not(.moving){transition:transform 0.2s, background-color 0.2s, width 0.2s}.sg-milestone.moving.svelte-10k3w4l.svelte-10k3w4l{z-index:1}.sg-milestone.selected.svelte-10k3w4l.svelte-10k3w4l{outline:2px solid rgba(3, 169, 244, 0.5);outline-offset:3px;z-index:1}";
     styleInject(css_248z$2);
 
-    var css_248z$3 = ".sg-time-range.svelte-18yq9be{height:100%;position:absolute;display:flex;flex-direction:column;align-items:center;background-image:linear-gradient(-45deg, rgba(0, 0, 0, 0) 46%, #e03218 49%, #e03218 51%, rgba(0, 0, 0, 0) 55%);background-size:6px 6px !important;color:red;font-weight:400}.sg-time-range-label.svelte-18yq9be{margin-top:10px;background:#fff;white-space:nowrap;padding:4px;font-weight:400;font-size:10px}";
+    var css_248z$3 = ".sg-time-range.svelte-ezlpj0{height:100%;position:absolute;display:flex;flex-direction:column;align-items:center;background-image:linear-gradient(-45deg, rgba(0, 0, 0, 0) 46%, #e03218 49%, #e03218 51%, rgba(0, 0, 0, 0) 55%);background-size:6px 6px !important;color:red;font-weight:400}.sg-time-range-label.svelte-ezlpj0{margin-top:10px;background:#fff;white-space:nowrap;padding:4px;font-weight:400;font-size:10px}";
     styleInject(css_248z$3);
 
-    /* src\entities\TimeRange.svelte generated by Svelte v3.23.0 */
+    /* src\entities\TimeRange.svelte generated by Svelte v3.46.4 */
 
     function create_fragment$2$1(ctx) {
     	let div1;
@@ -9354,8 +9369,8 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			t = text(t_value);
-    			attr(div0, "class", "sg-time-range-label svelte-18yq9be");
-    			attr(div1, "class", "sg-time-range svelte-18yq9be");
+    			attr(div0, "class", "sg-time-range-label svelte-ezlpj0");
+    			attr(div1, "class", "sg-time-range svelte-ezlpj0");
     			set_style(div1, "width", /*_position*/ ctx[2].width + "px");
     			set_style(div1, "left", /*_position*/ ctx[2].x + "px");
     			toggle_class(div1, "moving", /*resizing*/ ctx[1]);
@@ -9394,13 +9409,12 @@ var app = (function () {
     	let { width } = $$props;
     	let { resizing = false } = $$props;
     	const _position = { width, x: left };
-    	
 
-    	$$self.$set = $$props => {
-    		if ("model" in $$props) $$invalidate(0, model = $$props.model);
-    		if ("left" in $$props) $$invalidate(3, left = $$props.left);
-    		if ("width" in $$props) $$invalidate(4, width = $$props.width);
-    		if ("resizing" in $$props) $$invalidate(1, resizing = $$props.resizing);
+    	$$self.$$set = $$props => {
+    		if ('model' in $$props) $$invalidate(0, model = $$props.model);
+    		if ('left' in $$props) $$invalidate(3, left = $$props.left);
+    		if ('width' in $$props) $$invalidate(4, width = $$props.width);
+    		if ('resizing' in $$props) $$invalidate(1, resizing = $$props.resizing);
     	};
 
     	$$self.$$.update = () => {
@@ -9421,10 +9435,10 @@ var app = (function () {
     	}
     }
 
-    var css_248z$4 = ".sg-time-range-control.svelte-16dwney{position:absolute}.sg-time-range-handle-left.svelte-16dwney{position:absolute;left:0}.sg-time-range-handle-right.svelte-16dwney{position:absolute;right:0}.sg-time-range-handle-left.svelte-16dwney::before,.sg-time-range-handle-right.svelte-16dwney::before{position:absolute;content:'';bottom:4px;border-radius:6px 6px 6px 0;border:2px solid #b0b0b7;width:9px;height:9px;transform:translateX(-50%) rotate(-45deg);background-color:#fff;border-color:#e03218;cursor:ew-resize}";
+    var css_248z$4 = ".sg-time-range-control.svelte-1hnnt3v{position:absolute}.sg-time-range-handle-left.svelte-1hnnt3v{position:absolute;left:0}.sg-time-range-handle-right.svelte-1hnnt3v{position:absolute;right:0}.sg-time-range-handle-left.svelte-1hnnt3v::before,.sg-time-range-handle-right.svelte-1hnnt3v::before{position:absolute;content:'';bottom:4px;border-radius:6px 6px 6px 0;border:2px solid #b0b0b7;width:9px;height:9px;transform:translateX(-50%) rotate(-45deg);background-color:#fff;border-color:#e03218;cursor:ew-resize}";
     styleInject(css_248z$4);
 
-    /* src\entities\TimeRangeHeader.svelte generated by Svelte v3.23.0 */
+    /* src\entities\TimeRangeHeader.svelte generated by Svelte v3.46.4 */
 
     function create_fragment$3$1(ctx) {
     	let div2;
@@ -9440,9 +9454,9 @@ var app = (function () {
     			div0 = element("div");
     			t = space();
     			div1 = element("div");
-    			attr(div0, "class", "sg-time-range-handle-left svelte-16dwney");
-    			attr(div1, "class", "sg-time-range-handle-right svelte-16dwney");
-    			attr(div2, "class", "sg-time-range-control svelte-16dwney");
+    			attr(div0, "class", "sg-time-range-handle-left svelte-1hnnt3v");
+    			attr(div1, "class", "sg-time-range-handle-right svelte-1hnnt3v");
+    			attr(div2, "class", "sg-time-range-control svelte-1hnnt3v");
     			set_style(div2, "width", /*_position*/ ctx[0].width + "px");
     			set_style(div2, "left", /*_position*/ ctx[0].x + "px");
     		},
@@ -9481,15 +9495,14 @@ var app = (function () {
     }
 
     function instance$3$1($$self, $$props, $$invalidate) {
-    	const { rowContainer } = getContext("gantt");
-    	const { utils, columnService } = getContext("services");
-    	const { resizeHandleWidth } = getContext("options");
-    	getContext("dimensions");
+    	const { rowContainer } = getContext('gantt');
+    	const { utils, columnService } = getContext('services');
+    	const { resizeHandleWidth } = getContext('options');
+    	getContext('dimensions');
     	let { model } = $$props;
     	let { width } = $$props;
     	let { left } = $$props;
     	const _position = { width, x: left };
-    	
 
     	function drag(node) {
     		const ondrop = event => {
@@ -9506,7 +9519,7 @@ var app = (function () {
     				resizing: false
     			});
 
-    			window.removeEventListener("mousemove", onmousemove, false);
+    			window.removeEventListener('mousemove', onmousemove, false);
     		};
 
     		function update(state) {
@@ -9546,10 +9559,10 @@ var app = (function () {
     		return { destroy: () => draggable.destroy() };
     	}
 
-    	$$self.$set = $$props => {
-    		if ("model" in $$props) $$invalidate(2, model = $$props.model);
-    		if ("width" in $$props) $$invalidate(3, width = $$props.width);
-    		if ("left" in $$props) $$invalidate(4, left = $$props.left);
+    	$$self.$$set = $$props => {
+    		if ('model' in $$props) $$invalidate(2, model = $$props.model);
+    		if ('width' in $$props) $$invalidate(3, width = $$props.width);
+    		if ('left' in $$props) $$invalidate(4, left = $$props.left);
     	};
 
     	$$self.$$.update = () => {
@@ -9570,7 +9583,7 @@ var app = (function () {
     	}
     }
 
-    var css_248z$5 = ".column.svelte-by3854{position:absolute;height:100%;border-left:1px solid #a00707}";
+    var css_248z$5 = ".column.svelte-1xz2ifr{position:absolute;height:100%;border-left:1px solid #a00707}";
     styleInject(css_248z$5);
 
     class MomentSvelteGanttDateAdapter {
@@ -9734,10 +9747,10 @@ var app = (function () {
     //     }
     // }
 
-    var css_248z$6 = ".column-header-row.svelte-1sbstdn.svelte-1sbstdn{box-sizing:border-box;white-space:nowrap;height:32px}.column-header-cell.svelte-1sbstdn.svelte-1sbstdn{display:inline-block;height:100%;box-sizing:border-box;text-overflow:clip;text-align:center;display:inline-flex;justify-content:center;align-items:center;font-size:1em;font-size:14px;font-weight:300;transition:background 0.2s;cursor:pointer;user-select:none;border-right:#efefef 1px solid;border-bottom:#efefef 1px solid}.column-header-cell.svelte-1sbstdn.svelte-1sbstdn:hover{background:#f9f9f9}.column-header-cell.sticky.svelte-1sbstdn>.column-header-cell-label.svelte-1sbstdn{position:sticky;left:1rem}";
+    var css_248z$6 = ".column-header-row.svelte-1eoeq9j.svelte-1eoeq9j{box-sizing:border-box;white-space:nowrap;height:32px}.column-header-cell.svelte-1eoeq9j.svelte-1eoeq9j{display:inline-block;height:100%;box-sizing:border-box;text-overflow:clip;text-align:center;display:inline-flex;justify-content:center;align-items:center;font-size:1em;font-size:14px;font-weight:300;transition:background 0.2s;cursor:pointer;user-select:none;border-right:#efefef 1px solid;border-bottom:#efefef 1px solid}.column-header-cell.svelte-1eoeq9j.svelte-1eoeq9j:hover{background:#f9f9f9}.column-header-cell.sticky.svelte-1eoeq9j>.column-header-cell-label.svelte-1eoeq9j{position:sticky;left:1rem}";
     styleInject(css_248z$6);
 
-    /* src\column\ColumnHeaderRow.svelte generated by Svelte v3.23.0 */
+    /* src\column\ColumnHeaderRow.svelte generated by Svelte v3.46.4 */
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -9745,18 +9758,18 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (48:4) {#each _headers as _header}
+    // (47:4) {#each _headers as _header}
     function create_each_block$1(ctx) {
     	let div1;
     	let div0;
-    	let t0_value = (/*_header*/ ctx[14].label || "N/A") + "";
+    	let t0_value = (/*_header*/ ctx[14].label || 'N/A') + "";
     	let t0;
     	let t1;
     	let mounted;
     	let dispose;
 
-    	function click_handler(...args) {
-    		return /*click_handler*/ ctx[13](/*_header*/ ctx[14], ...args);
+    	function click_handler() {
+    		return /*click_handler*/ ctx[11](/*_header*/ ctx[14]);
     	}
 
     	return {
@@ -9765,8 +9778,8 @@ var app = (function () {
     			div0 = element("div");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr(div0, "class", "column-header-cell-label svelte-1sbstdn");
-    			attr(div1, "class", "column-header-cell svelte-1sbstdn");
+    			attr(div0, "class", "column-header-cell-label svelte-1eoeq9j");
+    			attr(div1, "class", "column-header-cell svelte-1eoeq9j");
     			set_style(div1, "width", /*_header*/ ctx[14].width + "px");
     			toggle_class(div1, "sticky", /*header*/ ctx[0].sticky);
     		},
@@ -9783,7 +9796,7 @@ var app = (function () {
     		},
     		p(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty & /*_headers*/ 2 && t0_value !== (t0_value = (/*_header*/ ctx[14].label || "N/A") + "")) set_data(t0, t0_value);
+    			if (dirty & /*_headers*/ 2 && t0_value !== (t0_value = (/*_header*/ ctx[14].label || 'N/A') + "")) set_data(t0, t0_value);
 
     			if (dirty & /*_headers*/ 2) {
     				set_style(div1, "width", /*_header*/ ctx[14].width + "px");
@@ -9818,7 +9831,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr(div, "class", "column-header-row svelte-1sbstdn");
+    			attr(div, "class", "column-header-row svelte-1eoeq9j");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
@@ -9864,11 +9877,10 @@ var app = (function () {
     	let $width;
     	let $from;
     	const dispatch = createEventDispatcher();
-    	
-    	const { from, to, width } = getContext("dimensions");
+    	const { from, to, width } = getContext('dimensions');
     	component_subscribe($$self, from, value => $$invalidate(10, $from = value));
     	component_subscribe($$self, width, value => $$invalidate(9, $width = value));
-    	const { dateAdapter } = getContext("options");
+    	const { dateAdapter } = getContext('options');
     	let { header } = $$props;
     	let { baseWidth } = $$props;
     	let { baseDuration } = $$props;
@@ -9876,18 +9888,18 @@ var app = (function () {
     	let { columnCount } = $$props;
     	let _headers = [];
 
-    	const click_handler = _header => dispatch("dateSelected", {
+    	const click_handler = _header => dispatch('dateSelected', {
     		from: _header.from,
     		to: _header.to,
     		unit: _header.unit
     	});
 
-    	$$self.$set = $$props => {
-    		if ("header" in $$props) $$invalidate(0, header = $$props.header);
-    		if ("baseWidth" in $$props) $$invalidate(7, baseWidth = $$props.baseWidth);
-    		if ("baseDuration" in $$props) $$invalidate(8, baseDuration = $$props.baseDuration);
-    		if ("columnWidth" in $$props) $$invalidate(5, columnWidth = $$props.columnWidth);
-    		if ("columnCount" in $$props) $$invalidate(6, columnCount = $$props.columnCount);
+    	$$self.$$set = $$props => {
+    		if ('header' in $$props) $$invalidate(0, header = $$props.header);
+    		if ('baseWidth' in $$props) $$invalidate(7, baseWidth = $$props.baseWidth);
+    		if ('baseDuration' in $$props) $$invalidate(8, baseDuration = $$props.baseDuration);
+    		if ('columnWidth' in $$props) $$invalidate(5, columnWidth = $$props.columnWidth);
+    		if ('columnCount' in $$props) $$invalidate(6, columnCount = $$props.columnCount);
     	};
 
     	$$self.$$.update = () => {
@@ -9909,7 +9921,7 @@ var app = (function () {
     				$$invalidate(6, columnCount = Math.ceil($width / columnWidth));
 
     				if (!isFinite(columnCount)) {
-    					console.error("columnCount is not finite");
+    					console.error('columnCount is not finite');
     					$$invalidate(6, columnCount = 0);
     				}
     			}
@@ -9935,7 +9947,7 @@ var app = (function () {
     				}
 
     				$$invalidate(1, _headers = headers);
-    				alert("x" + JSON.stringify(_headers));
+    				alert('x' + JSON.stringify(_headers));
     			}
     		}
     	};
@@ -9952,8 +9964,6 @@ var app = (function () {
     		baseDuration,
     		$width,
     		$from,
-    		to,
-    		dateAdapter,
     		click_handler
     	];
     }
@@ -10027,7 +10037,7 @@ var app = (function () {
         return [input[res[0]], input[res[1]]];
     }
 
-    /* src\column\ColumnHeader.svelte generated by Svelte v3.23.0 */
+    /* src\column\ColumnHeader.svelte generated by Svelte v3.46.4 */
 
     function get_each_context$1$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -10037,9 +10047,10 @@ var app = (function () {
 
     // (42:0) {#each headers as header}
     function create_each_block$1$1(ctx) {
+    	let columnheaderrow;
     	let current;
 
-    	const columnheaderrow = new ColumnHeaderRow({
+    	columnheaderrow = new ColumnHeaderRow({
     			props: {
     				header: /*header*/ ctx[13],
     				baseWidth: /*baseHeaderWidth*/ ctx[1],
@@ -10163,28 +10174,28 @@ var app = (function () {
     }
 
     function instance$5$1($$self, $$props, $$invalidate) {
-    	let $from;
-    	let $to;
     	let $width;
+    	let $to;
+    	let $from;
     	let { headers } = $$props;
     	let { columnUnit } = $$props;
     	let { columnOffset } = $$props;
-    	const { from, to, width } = getContext("dimensions");
-    	component_subscribe($$self, from, value => $$invalidate(9, $from = value));
+    	const { from, to, width } = getContext('dimensions');
+    	component_subscribe($$self, from, value => $$invalidate(11, $from = value));
     	component_subscribe($$self, to, value => $$invalidate(10, $to = value));
-    	component_subscribe($$self, width, value => $$invalidate(11, $width = value));
+    	component_subscribe($$self, width, value => $$invalidate(9, $width = value));
     	let minHeader;
     	let baseHeaderWidth;
     	let baseHeaderDuration;
 
     	function dateSelected_handler(event) {
-    		bubble($$self, event);
+    		bubble.call(this, $$self, event);
     	}
 
-    	$$self.$set = $$props => {
-    		if ("headers" in $$props) $$invalidate(0, headers = $$props.headers);
-    		if ("columnUnit" in $$props) $$invalidate(6, columnUnit = $$props.columnUnit);
-    		if ("columnOffset" in $$props) $$invalidate(7, columnOffset = $$props.columnOffset);
+    	$$self.$$set = $$props => {
+    		if ('headers' in $$props) $$invalidate(0, headers = $$props.headers);
+    		if ('columnUnit' in $$props) $$invalidate(6, columnUnit = $$props.columnUnit);
+    		if ('columnOffset' in $$props) $$invalidate(7, columnOffset = $$props.columnOffset);
     	};
 
     	$$self.$$.update = () => {
@@ -10212,7 +10223,7 @@ var app = (function () {
     				$$invalidate(1, baseHeaderWidth = getPositionByDate($from + minHeader.duration, $from, $to, $width) | 0);
 
     				//alert('baseHeaderWidth' + baseHeaderWidth);
-    				if (baseHeaderWidth <= 0) console.error("baseHeaderWidth is invalid, columns or headers might be too short for the current view.");
+    				if (baseHeaderWidth <= 0) console.error('baseHeaderWidth is invalid, columns or headers might be too short for the current view.');
     			}
     		}
 
@@ -10233,9 +10244,9 @@ var app = (function () {
     		columnUnit,
     		columnOffset,
     		minHeader,
-    		$from,
-    		$to,
     		$width,
+    		$to,
+    		$from,
     		dateSelected_handler
     	];
     }
@@ -10252,10 +10263,10 @@ var app = (function () {
     	}
     }
 
-    var css_248z$7 = ".sg-columns.svelte-1clwlpk{position:absolute;height:100%;width:100%;overflow:hidden;background-repeat:repeat;background-position-x:-1px}";
+    var css_248z$7 = ".sg-columns.svelte-19kvsxe{position:absolute;height:100%;width:100%;overflow:hidden;background-repeat:repeat;background-position-x:-1px}";
     styleInject(css_248z$7);
 
-    /* src\column\Columns.svelte generated by Svelte v3.23.0 */
+    /* src\column\Columns.svelte generated by Svelte v3.46.4 */
 
     function create_fragment$6$1(ctx) {
     	let div;
@@ -10263,7 +10274,7 @@ var app = (function () {
     	return {
     		c() {
     			div = element("div");
-    			attr(div, "class", "sg-columns svelte-1clwlpk");
+    			attr(div, "class", "sg-columns svelte-19kvsxe");
     			set_style(div, "background-image", /*backgroundImage*/ ctx[0]);
     		},
     		m(target, anchor) {
@@ -10285,15 +10296,15 @@ var app = (function () {
     function instance$6$1($$self, $$props, $$invalidate) {
     	let { columns = [] } = $$props;
     	let { columnStrokeWidth = 1 } = $$props;
-    	let { columnStrokeColor = "#efefef" } = $$props;
+    	let { columnStrokeColor = '#efefef' } = $$props;
 
     	function createBackground(columns) {
     		alert(JSON.stringify(columns));
-    		const canvas = document.createElement("canvas");
+    		const canvas = document.createElement('canvas');
     		canvas.width = (columns.length - 1) * columns[0].width;
-    		alert("columns width" + (columns.length - 1) * columns[0].width);
+    		alert('columns width' + (columns.length - 1) * columns[0].width);
     		canvas.height = 20;
-    		const ctx = canvas.getContext("2d");
+    		const ctx = canvas.getContext('2d');
     		ctx.shadowColor = "rgba(128,128,128,0.5)";
     		ctx.shadowOffsetX = 0;
     		ctx.shadowOffsetY = 0;
@@ -10323,10 +10334,10 @@ var app = (function () {
 
     	let backgroundImage;
 
-    	$$self.$set = $$props => {
-    		if ("columns" in $$props) $$invalidate(1, columns = $$props.columns);
-    		if ("columnStrokeWidth" in $$props) $$invalidate(2, columnStrokeWidth = $$props.columnStrokeWidth);
-    		if ("columnStrokeColor" in $$props) $$invalidate(3, columnStrokeColor = $$props.columnStrokeColor);
+    	$$self.$$set = $$props => {
+    		if ('columns' in $$props) $$invalidate(1, columns = $$props.columns);
+    		if ('columnStrokeWidth' in $$props) $$invalidate(2, columnStrokeWidth = $$props.columnStrokeWidth);
+    		if ('columnStrokeColor' in $$props) $$invalidate(3, columnStrokeColor = $$props.columnStrokeColor);
     	};
 
     	$$self.$$.update = () => {
@@ -10354,13 +10365,13 @@ var app = (function () {
     	}
     }
 
-    var css_248z$8 = ".sg-context-menu.svelte-1noieoz{position:absolute;background:white;border:1px solid #ccc;padding:0.25em 0;font-size:10px;transition:opacity 0.4s ease 0s;opacity:1;box-shadow:rgba(0, 0, 0, 0.32) 1px 1px 3px 0px}.context-option.svelte-1noieoz:hover{background:#eee}.context-option.svelte-1noieoz{cursor:default;padding:0.2em 1em}";
+    var css_248z$8 = ".sg-context-menu.svelte-1a9x2in{position:absolute;background:white;border:1px solid #ccc;padding:0.25em 0;font-size:10px;transition:opacity 0.4s ease 0s;opacity:1;box-shadow:rgba(0, 0, 0, 0.32) 1px 1px 3px 0px}.context-option.svelte-1a9x2in:hover{background:#eee}.context-option.svelte-1a9x2in{cursor:default;padding:0.2em 1em}";
     styleInject(css_248z$8);
 
-    var css_248z$9 = ".sg-resize.svelte-1cpm1hk{z-index:2;background:#e9eaeb;width:5px;cursor:col-resize;position:absolute;height:100%;transition:width 0.2s, transform 0.2s}.sg-resize.svelte-1cpm1hk:hover{transform:translateX(-2px);width:10px}";
+    var css_248z$9 = ".sg-resize.svelte-v0xg82{z-index:2;background:#e9eaeb;width:5px;cursor:col-resize;position:absolute;height:100%;transition:width 0.2s, transform 0.2s}.sg-resize.svelte-v0xg82:hover{transform:translateX(-2px);width:10px}";
     styleInject(css_248z$9);
 
-    /* src\ui\Resizer.svelte generated by Svelte v3.23.0 */
+    /* src\ui\Resizer.svelte generated by Svelte v3.46.4 */
 
     function create_fragment$7$1(ctx) {
     	let div;
@@ -10370,7 +10381,7 @@ var app = (function () {
     	return {
     		c() {
     			div = element("div");
-    			attr(div, "class", "sg-resize svelte-1cpm1hk");
+    			attr(div, "class", "sg-resize svelte-v0xg82");
     			set_style(div, "left", /*x*/ ctx[0] + "px");
     		},
     		m(target, anchor) {
@@ -10404,13 +10415,13 @@ var app = (function () {
     	const dragOptions = {
     		onDrag: event => {
     			($$invalidate(0, x = event.x));
-    			dispatch("resize", { left: x });
-    			setCursor("col-resize");
+    			dispatch('resize', { left: x });
+    			setCursor('col-resize');
     		},
     		onDrop: event => {
     			($$invalidate(0, x = event.x));
-    			dispatch("resize", { left: x });
-    			setCursor("default");
+    			dispatch('resize', { left: x });
+    			setCursor('default');
     		},
     		dragAllowed: true,
     		resizeAllowed: false,
@@ -10424,9 +10435,9 @@ var app = (function () {
     		return new Draggable(node, dragOptions);
     	}
 
-    	$$self.$set = $$props => {
-    		if ("x" in $$props) $$invalidate(0, x = $$props.x);
-    		if ("container" in $$props) $$invalidate(2, container = $$props.container);
+    	$$self.$$set = $$props => {
+    		if ('x' in $$props) $$invalidate(0, x = $$props.x);
+    		if ('container' in $$props) $$invalidate(2, container = $$props.container);
     	};
 
     	$$self.$$.update = () => {
@@ -10628,10 +10639,10 @@ var app = (function () {
         }
     }
 
-    var css_248z$a = ".sg-disable-transition.svelte-12fxs8g .sg-task,.sg-disable-transition.svelte-12fxs8g .sg-milestone{transition:transform 0s, background-color 0.2s, width 0s !important}.sg-view:not(:first-child){margin-left:5px}.right-scrollbar-visible.svelte-12fxs8g{padding-right:17px}.sg-timeline.svelte-12fxs8g{flex:1 1 0%;display:flex;flex-direction:column;overflow-x:auto}.sg-gantt.svelte-12fxs8g{display:flex;width:100%;height:100%;position:relative}.sg-foreground.svelte-12fxs8g{box-sizing:border-box;overflow:hidden;top:0;left:0;position:absolute;width:100%;height:100%;z-index:1;pointer-events:none}.sg-rows.svelte-12fxs8g{width:100%;box-sizing:border-box;overflow:hidden}.sg-timeline-body.svelte-12fxs8g{overflow:auto;flex:1 1 auto}.sg-header-scroller.svelte-12fxs8g{border-right:1px solid #efefef;overflow:hidden;position:relative}.content.svelte-12fxs8g{position:relative}*{box-sizing:border-box}";
+    var css_248z$a = ".sg-disable-transition.svelte-8uspd .sg-task,.sg-disable-transition.svelte-8uspd .sg-milestone{transition:transform 0s, background-color 0.2s, width 0s !important}.sg-view:not(:first-child){margin-left:5px}.right-scrollbar-visible.svelte-8uspd{padding-right:17px}.sg-timeline.svelte-8uspd{flex:1 1 0%;display:flex;flex-direction:column;overflow-x:auto}.sg-gantt.svelte-8uspd{display:flex;width:100%;height:100%;position:relative}.sg-foreground.svelte-8uspd{box-sizing:border-box;overflow:hidden;top:0;left:0;position:absolute;width:100%;height:100%;z-index:1;pointer-events:none}.sg-rows.svelte-8uspd{width:100%;box-sizing:border-box;overflow:hidden}.sg-timeline-body.svelte-8uspd{overflow:auto;flex:1 1 auto}.sg-header-scroller.svelte-8uspd{border-right:1px solid #efefef;overflow:hidden;position:relative}.content.svelte-8uspd{position:relative}*{box-sizing:border-box}";
     styleInject(css_248z$a);
 
-    /* src\Gantt.svelte generated by Svelte v3.23.0 */
+    /* src\Gantt.svelte generated by Svelte v3.46.4 */
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -10669,20 +10680,22 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (568:4) {#each ganttTableModules as module}
+    // (566:4) {#each ganttTableModules as module}
     function create_each_block_5(ctx) {
+    	let switch_instance;
     	let t;
+    	let resizer;
     	let current;
 
     	const switch_instance_spread_levels = [
     		{
-    			rowContainerHeight: /*rowContainerHeight*/ ctx[16]
+    			rowContainerHeight: /*rowContainerHeight*/ ctx[9]
     		},
-    		{ paddingTop: /*paddingTop*/ ctx[17] },
-    		{ paddingBottom: /*paddingBottom*/ ctx[18] },
-    		{ tableWidth: /*tableWidth*/ ctx[1] },
+    		{ paddingTop: /*paddingTop*/ ctx[20] },
+    		{ paddingBottom: /*paddingBottom*/ ctx[21] },
+    		{ tableWidth: /*tableWidth*/ ctx[3] },
     		/*$$restProps*/ ctx[46],
-    		{ visibleRows: /*visibleRows*/ ctx[19] }
+    		{ visibleRows: /*visibleRows*/ ctx[10] }
     	];
 
     	var switch_value = /*module*/ ctx[129];
@@ -10698,14 +10711,14 @@ var app = (function () {
     	}
 
     	if (switch_value) {
-    		var switch_instance = new switch_value(switch_props());
+    		switch_instance = new switch_value(switch_props());
     		switch_instance.$on("init", onModuleInit);
     	}
 
-    	const resizer = new Resizer({
+    	resizer = new Resizer({
     			props: {
-    				x: /*tableWidth*/ ctx[1],
-    				container: /*ganttElement*/ ctx[9]
+    				x: /*tableWidth*/ ctx[3],
+    				container: /*ganttElement*/ ctx[13]
     			}
     		});
 
@@ -10727,16 +10740,16 @@ var app = (function () {
     			current = true;
     		},
     		p(ctx, dirty) {
-    			const switch_instance_changes = (dirty[0] & /*rowContainerHeight, paddingTop, paddingBottom, tableWidth, visibleRows*/ 983042 | dirty[1] & /*$$restProps*/ 32768)
+    			const switch_instance_changes = (dirty[0] & /*rowContainerHeight, paddingTop, paddingBottom, tableWidth, visibleRows*/ 3147272 | dirty[1] & /*$$restProps*/ 32768)
     			? get_spread_update(switch_instance_spread_levels, [
-    					dirty[0] & /*rowContainerHeight*/ 65536 && {
-    						rowContainerHeight: /*rowContainerHeight*/ ctx[16]
+    					dirty[0] & /*rowContainerHeight*/ 512 && {
+    						rowContainerHeight: /*rowContainerHeight*/ ctx[9]
     					},
-    					dirty[0] & /*paddingTop*/ 131072 && { paddingTop: /*paddingTop*/ ctx[17] },
-    					dirty[0] & /*paddingBottom*/ 262144 && { paddingBottom: /*paddingBottom*/ ctx[18] },
-    					dirty[0] & /*tableWidth*/ 2 && { tableWidth: /*tableWidth*/ ctx[1] },
+    					dirty[0] & /*paddingTop*/ 1048576 && { paddingTop: /*paddingTop*/ ctx[20] },
+    					dirty[0] & /*paddingBottom*/ 2097152 && { paddingBottom: /*paddingBottom*/ ctx[21] },
+    					dirty[0] & /*tableWidth*/ 8 && { tableWidth: /*tableWidth*/ ctx[3] },
     					dirty[1] & /*$$restProps*/ 32768 && get_spread_object(/*$$restProps*/ ctx[46]),
-    					dirty[0] & /*visibleRows*/ 524288 && { visibleRows: /*visibleRows*/ ctx[19] }
+    					dirty[0] & /*visibleRows*/ 1024 && { visibleRows: /*visibleRows*/ ctx[10] }
     				])
     			: {};
 
@@ -10766,8 +10779,8 @@ var app = (function () {
     			}
 
     			const resizer_changes = {};
-    			if (dirty[0] & /*tableWidth*/ 2) resizer_changes.x = /*tableWidth*/ ctx[1];
-    			if (dirty[0] & /*ganttElement*/ 512) resizer_changes.container = /*ganttElement*/ ctx[9];
+    			if (dirty[0] & /*tableWidth*/ 8) resizer_changes.x = /*tableWidth*/ ctx[3];
+    			if (dirty[0] & /*ganttElement*/ 8192) resizer_changes.container = /*ganttElement*/ ctx[13];
     			resizer.$set(resizer_changes);
     		},
     		i(local) {
@@ -10789,9 +10802,10 @@ var app = (function () {
     	};
     }
 
-    // (579:20) {#each $allTimeRanges as timeRange (timeRange.model.id)}
+    // (577:20) {#each $allTimeRanges as timeRange (timeRange.model.id)}
     function create_each_block_4(key_1, ctx) {
     	let first;
+    	let timerangeheader;
     	let current;
     	const timerangeheader_spread_levels = [/*timeRange*/ ctx[135]];
     	let timerangeheader_props = {};
@@ -10800,7 +10814,7 @@ var app = (function () {
     		timerangeheader_props = assign(timerangeheader_props, timerangeheader_spread_levels[i]);
     	}
 
-    	const timerangeheader = new TimeRangeHeader({ props: timerangeheader_props });
+    	timerangeheader = new TimeRangeHeader({ props: timerangeheader_props });
 
     	return {
     		key: key_1,
@@ -10815,7 +10829,9 @@ var app = (function () {
     			mount_component(timerangeheader, target, anchor);
     			current = true;
     		},
-    		p(ctx, dirty) {
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
+
     			const timerangeheader_changes = (dirty[0] & /*$allTimeRanges*/ 33554432)
     			? get_spread_update(timerangeheader_spread_levels, [get_spread_object(/*timeRange*/ ctx[135])])
     			: {};
@@ -10838,11 +10854,12 @@ var app = (function () {
     	};
     }
 
-    // (592:24) {#each visibleRows as row (row.model.id)}
+    // (590:24) {#each visibleRows as row (row.model.id)}
     function create_each_block_3(key_1, ctx) {
     	let first;
+    	let row;
     	let current;
-    	const row = new Row({ props: { row: /*row*/ ctx[138] } });
+    	row = new Row({ props: { row: /*row*/ ctx[138] } });
 
     	return {
     		key: key_1,
@@ -10857,9 +10874,10 @@ var app = (function () {
     			mount_component(row, target, anchor);
     			current = true;
     		},
-    		p(ctx, dirty) {
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
     			const row_changes = {};
-    			if (dirty[0] & /*visibleRows*/ 524288) row_changes.row = /*row*/ ctx[138];
+    			if (dirty[0] & /*visibleRows*/ 1024) row_changes.row = /*row*/ ctx[138];
     			row.$set(row_changes);
     		},
     		i(local) {
@@ -10878,9 +10896,10 @@ var app = (function () {
     	};
     }
 
-    // (598:20) {#each $allTimeRanges as timeRange (timeRange.model.id)}
+    // (596:20) {#each $allTimeRanges as timeRange (timeRange.model.id)}
     function create_each_block_2(key_1, ctx) {
     	let first;
+    	let timerange;
     	let current;
     	const timerange_spread_levels = [/*timeRange*/ ctx[135]];
     	let timerange_props = {};
@@ -10889,7 +10908,7 @@ var app = (function () {
     		timerange_props = assign(timerange_props, timerange_spread_levels[i]);
     	}
 
-    	const timerange = new TimeRange({ props: timerange_props });
+    	timerange = new TimeRange({ props: timerange_props });
 
     	return {
     		key: key_1,
@@ -10904,7 +10923,9 @@ var app = (function () {
     			mount_component(timerange, target, anchor);
     			current = true;
     		},
-    		p(ctx, dirty) {
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
+
     			const timerange_changes = (dirty[0] & /*$allTimeRanges*/ 33554432)
     			? get_spread_update(timerange_spread_levels, [get_spread_object(/*timeRange*/ ctx[135])])
     			: {};
@@ -10927,9 +10948,10 @@ var app = (function () {
     	};
     }
 
-    // (602:20) {#each visibleTasks as task (task.model.id)}
+    // (600:20) {#each visibleTasks as task (task.model.id)}
     function create_each_block_1$1(key_1, ctx) {
     	let first;
+    	let task;
     	let current;
 
     	const task_spread_levels = [
@@ -10947,7 +10969,7 @@ var app = (function () {
     		task_props = assign(task_props, task_spread_levels[i]);
     	}
 
-    	const task = new Task({ props: task_props });
+    	task = new Task({ props: task_props });
 
     	return {
     		key: key_1,
@@ -10962,8 +10984,10 @@ var app = (function () {
     			mount_component(task, target, anchor);
     			current = true;
     		},
-    		p(ctx, dirty) {
-    			const task_changes = (dirty[0] & /*visibleTasks*/ 1048576)
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			const task_changes = (dirty[0] & /*visibleTasks*/ 4194304)
     			? get_spread_update(task_spread_levels, [
     					{ model: /*task*/ ctx[132].model },
     					{ left: /*task*/ ctx[132].left },
@@ -10992,15 +11016,16 @@ var app = (function () {
     	};
     }
 
-    // (607:16) {#each ganttBodyModules as module}
+    // (605:16) {#each ganttBodyModules as module}
     function create_each_block$2(ctx) {
+    	let switch_instance;
     	let switch_instance_anchor;
     	let current;
 
     	const switch_instance_spread_levels = [
-    		{ paddingTop: /*paddingTop*/ ctx[17] },
-    		{ paddingBottom: /*paddingBottom*/ ctx[18] },
-    		{ visibleRows: /*visibleRows*/ ctx[19] },
+    		{ paddingTop: /*paddingTop*/ ctx[20] },
+    		{ paddingBottom: /*paddingBottom*/ ctx[21] },
+    		{ visibleRows: /*visibleRows*/ ctx[10] },
     		/*$$restProps*/ ctx[46]
     	];
 
@@ -11017,7 +11042,7 @@ var app = (function () {
     	}
 
     	if (switch_value) {
-    		var switch_instance = new switch_value(switch_props());
+    		switch_instance = new switch_value(switch_props());
     		switch_instance.$on("init", onModuleInit);
     	}
 
@@ -11035,11 +11060,11 @@ var app = (function () {
     			current = true;
     		},
     		p(ctx, dirty) {
-    			const switch_instance_changes = (dirty[0] & /*paddingTop, paddingBottom, visibleRows*/ 917504 | dirty[1] & /*$$restProps*/ 32768)
+    			const switch_instance_changes = (dirty[0] & /*paddingTop, paddingBottom, visibleRows*/ 3146752 | dirty[1] & /*$$restProps*/ 32768)
     			? get_spread_update(switch_instance_spread_levels, [
-    					dirty[0] & /*paddingTop*/ 131072 && { paddingTop: /*paddingTop*/ ctx[17] },
-    					dirty[0] & /*paddingBottom*/ 262144 && { paddingBottom: /*paddingBottom*/ ctx[18] },
-    					dirty[0] & /*visibleRows*/ 524288 && { visibleRows: /*visibleRows*/ ctx[19] },
+    					dirty[0] & /*paddingTop*/ 1048576 && { paddingTop: /*paddingTop*/ ctx[20] },
+    					dirty[0] & /*paddingBottom*/ 2097152 && { paddingBottom: /*paddingBottom*/ ctx[21] },
+    					dirty[0] & /*visibleRows*/ 1024 && { visibleRows: /*visibleRows*/ ctx[10] },
     					dirty[1] & /*$$restProps*/ 32768 && get_spread_object(/*$$restProps*/ ctx[46])
     				])
     			: {};
@@ -11092,6 +11117,7 @@ var app = (function () {
     	let div2;
     	let div1;
     	let div0;
+    	let columnheader;
     	let t1;
     	let each_blocks_4 = [];
     	let each1_lookup = new Map();
@@ -11099,6 +11125,7 @@ var app = (function () {
     	let t2;
     	let div7;
     	let div6;
+    	let columns_1;
     	let t3;
     	let div4;
     	let div3;
@@ -11128,11 +11155,11 @@ var app = (function () {
     		each_blocks_5[i] = null;
     	});
 
-    	const columnheader = new ColumnHeader({
+    	columnheader = new ColumnHeader({
     			props: {
-    				headers: /*headers*/ ctx[0],
-    				columnUnit: /*columnUnit*/ ctx[2],
-    				columnOffset: /*columnOffset*/ ctx[3]
+    				headers: /*headers*/ ctx[2],
+    				columnUnit: /*columnUnit*/ ctx[0],
+    				columnOffset: /*columnOffset*/ ctx[1]
     			}
     		});
 
@@ -11146,15 +11173,15 @@ var app = (function () {
     		each1_lookup.set(key, each_blocks_4[i] = create_each_block_4(key, child_ctx));
     	}
 
-    	const columns_1 = new Columns({
+    	columns_1 = new Columns({
     			props: {
-    				columns: /*columns*/ ctx[13],
+    				columns: /*columns*/ ctx[17],
     				columnStrokeColor: /*columnStrokeColor*/ ctx[7],
     				columnStrokeWidth: /*columnStrokeWidth*/ ctx[8]
     			}
     		});
 
-    	let each_value_3 = /*visibleRows*/ ctx[19];
+    	let each_value_3 = /*visibleRows*/ ctx[10];
     	const get_key_1 = ctx => /*row*/ ctx[138].model.id;
 
     	for (let i = 0; i < each_value_3.length; i += 1) {
@@ -11172,7 +11199,7 @@ var app = (function () {
     		each3_lookup.set(key, each_blocks_2[i] = create_each_block_2(key, child_ctx));
     	}
 
-    	let each_value_1 = /*visibleTasks*/ ctx[20];
+    	let each_value_1 = /*visibleTasks*/ ctx[22];
     	const get_key_3 = ctx => /*task*/ ctx[132].model.id;
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -11243,24 +11270,24 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr(div0, "class", "header-container svelte-12fxs8g");
-    			set_style(div0, "width", /*$_width*/ ctx[22] + "px");
-    			attr(div1, "class", "sg-header-scroller svelte-12fxs8g");
-    			attr(div2, "class", "sg-header svelte-12fxs8g");
-    			add_render_callback(() => /*div2_elementresize_handler*/ ctx[124].call(div2));
-    			toggle_class(div2, "right-scrollbar-visible", /*rightScrollbarVisible*/ ctx[15]);
-    			set_style(div3, "transform", "translateY(" + /*paddingTop*/ ctx[17] + "px)");
-    			attr(div4, "class", "sg-rows svelte-12fxs8g");
-    			set_style(div4, "height", /*rowContainerHeight*/ ctx[16] + "px");
-    			attr(div5, "class", "sg-foreground svelte-12fxs8g");
-    			attr(div6, "class", "content svelte-12fxs8g");
-    			set_style(div6, "width", /*$_width*/ ctx[22] + "px");
-    			attr(div7, "class", "sg-timeline-body svelte-12fxs8g");
-    			add_render_callback(() => /*div7_elementresize_handler*/ ctx[127].call(div7));
-    			toggle_class(div7, "zooming", /*zooming*/ ctx[14]);
-    			attr(div8, "class", "sg-timeline sg-view svelte-12fxs8g");
-    			attr(div9, "class", div9_class_value = "sg-gantt " + /*classes*/ ctx[4] + " svelte-12fxs8g");
-    			toggle_class(div9, "sg-disable-transition", !/*disableTransition*/ ctx[21]);
+    			attr(div0, "class", "header-container svelte-8uspd");
+    			set_style(div0, "width", /*$_width*/ ctx[12] + "px");
+    			attr(div1, "class", "sg-header-scroller svelte-8uspd");
+    			attr(div2, "class", "sg-header svelte-8uspd");
+    			add_render_callback(() => /*div2_elementresize_handler*/ ctx[105].call(div2));
+    			toggle_class(div2, "right-scrollbar-visible", /*rightScrollbarVisible*/ ctx[19]);
+    			set_style(div3, "transform", "translateY(" + /*paddingTop*/ ctx[20] + "px)");
+    			attr(div4, "class", "sg-rows svelte-8uspd");
+    			set_style(div4, "height", /*rowContainerHeight*/ ctx[9] + "px");
+    			attr(div5, "class", "sg-foreground svelte-8uspd");
+    			attr(div6, "class", "content svelte-8uspd");
+    			set_style(div6, "width", /*$_width*/ ctx[12] + "px");
+    			attr(div7, "class", "sg-timeline-body svelte-8uspd");
+    			add_render_callback(() => /*div7_elementresize_handler*/ ctx[108].call(div7));
+    			toggle_class(div7, "zooming", /*zooming*/ ctx[18]);
+    			attr(div8, "class", "sg-timeline sg-view svelte-8uspd");
+    			attr(div9, "class", div9_class_value = "sg-gantt " + /*classes*/ ctx[4] + " svelte-8uspd");
+    			toggle_class(div9, "sg-disable-transition", !/*disableTransition*/ ctx[23]);
     		},
     		m(target, anchor) {
     			insert(target, div9, anchor);
@@ -11281,8 +11308,8 @@ var app = (function () {
     				each_blocks_4[i].m(div0, null);
     			}
 
-    			/*div2_binding*/ ctx[123](div2);
-    			div2_resize_listener = add_resize_listener(div2, /*div2_elementresize_handler*/ ctx[124].bind(div2));
+    			/*div2_binding*/ ctx[104](div2);
+    			div2_resize_listener = add_resize_listener(div2, /*div2_elementresize_handler*/ ctx[105].bind(div2));
     			append(div8, t2);
     			append(div8, div7);
     			append(div7, div6);
@@ -11295,7 +11322,7 @@ var app = (function () {
     				each_blocks_3[i].m(div3, null);
     			}
 
-    			/*div4_binding*/ ctx[125](div4);
+    			/*div4_binding*/ ctx[106](div4);
     			append(div6, t4);
     			append(div6, div5);
 
@@ -11315,9 +11342,9 @@ var app = (function () {
     				each_blocks[i].m(div6, null);
     			}
 
-    			/*div7_binding*/ ctx[126](div7);
-    			div7_resize_listener = add_resize_listener(div7, /*div7_elementresize_handler*/ ctx[127].bind(div7));
-    			/*div9_binding*/ ctx[128](div9);
+    			/*div7_binding*/ ctx[107](div7);
+    			div7_resize_listener = add_resize_listener(div7, /*div7_elementresize_handler*/ ctx[108].bind(div7));
+    			/*div9_binding*/ ctx[109](div9);
     			current = true;
 
     			if (!mounted) {
@@ -11333,7 +11360,7 @@ var app = (function () {
     			}
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*tableWidth, ganttElement, ganttTableModules, rowContainerHeight, paddingTop, paddingBottom, visibleRows*/ 983586 | dirty[1] & /*onResize, $$restProps*/ 36864) {
+    			if (dirty[0] & /*tableWidth, ganttElement, ganttTableModules, rowContainerHeight, paddingTop, paddingBottom, visibleRows*/ 3155496 | dirty[1] & /*onResize, $$restProps*/ 36864) {
     				each_value_5 = /*ganttTableModules*/ ctx[5];
     				let i;
 
@@ -11361,62 +11388,62 @@ var app = (function () {
     			}
 
     			const columnheader_changes = {};
-    			if (dirty[0] & /*headers*/ 1) columnheader_changes.headers = /*headers*/ ctx[0];
-    			if (dirty[0] & /*columnUnit*/ 4) columnheader_changes.columnUnit = /*columnUnit*/ ctx[2];
-    			if (dirty[0] & /*columnOffset*/ 8) columnheader_changes.columnOffset = /*columnOffset*/ ctx[3];
+    			if (dirty[0] & /*headers*/ 4) columnheader_changes.headers = /*headers*/ ctx[2];
+    			if (dirty[0] & /*columnUnit*/ 1) columnheader_changes.columnUnit = /*columnUnit*/ ctx[0];
+    			if (dirty[0] & /*columnOffset*/ 2) columnheader_changes.columnOffset = /*columnOffset*/ ctx[1];
     			columnheader.$set(columnheader_changes);
 
     			if (dirty[0] & /*$allTimeRanges*/ 33554432) {
-    				const each_value_4 = /*$allTimeRanges*/ ctx[25];
+    				each_value_4 = /*$allTimeRanges*/ ctx[25];
     				group_outros();
     				each_blocks_4 = update_keyed_each(each_blocks_4, dirty, get_key, 1, ctx, each_value_4, each1_lookup, div0, outro_and_destroy_block, create_each_block_4, null, get_each_context_4);
     				check_outros();
     			}
 
-    			if (!current || dirty[0] & /*$_width*/ 4194304) {
-    				set_style(div0, "width", /*$_width*/ ctx[22] + "px");
+    			if (!current || dirty[0] & /*$_width*/ 4096) {
+    				set_style(div0, "width", /*$_width*/ ctx[12] + "px");
     			}
 
-    			if (dirty[0] & /*rightScrollbarVisible*/ 32768) {
-    				toggle_class(div2, "right-scrollbar-visible", /*rightScrollbarVisible*/ ctx[15]);
+    			if (dirty[0] & /*rightScrollbarVisible*/ 524288) {
+    				toggle_class(div2, "right-scrollbar-visible", /*rightScrollbarVisible*/ ctx[19]);
     			}
 
     			const columns_1_changes = {};
-    			if (dirty[0] & /*columns*/ 8192) columns_1_changes.columns = /*columns*/ ctx[13];
+    			if (dirty[0] & /*columns*/ 131072) columns_1_changes.columns = /*columns*/ ctx[17];
     			if (dirty[0] & /*columnStrokeColor*/ 128) columns_1_changes.columnStrokeColor = /*columnStrokeColor*/ ctx[7];
     			if (dirty[0] & /*columnStrokeWidth*/ 256) columns_1_changes.columnStrokeWidth = /*columnStrokeWidth*/ ctx[8];
     			columns_1.$set(columns_1_changes);
 
-    			if (dirty[0] & /*visibleRows*/ 524288) {
-    				const each_value_3 = /*visibleRows*/ ctx[19];
+    			if (dirty[0] & /*visibleRows*/ 1024) {
+    				each_value_3 = /*visibleRows*/ ctx[10];
     				group_outros();
     				each_blocks_3 = update_keyed_each(each_blocks_3, dirty, get_key_1, 1, ctx, each_value_3, each2_lookup, div3, outro_and_destroy_block, create_each_block_3, null, get_each_context_3);
     				check_outros();
     			}
 
-    			if (!current || dirty[0] & /*paddingTop*/ 131072) {
-    				set_style(div3, "transform", "translateY(" + /*paddingTop*/ ctx[17] + "px)");
+    			if (!current || dirty[0] & /*paddingTop*/ 1048576) {
+    				set_style(div3, "transform", "translateY(" + /*paddingTop*/ ctx[20] + "px)");
     			}
 
-    			if (!current || dirty[0] & /*rowContainerHeight*/ 65536) {
-    				set_style(div4, "height", /*rowContainerHeight*/ ctx[16] + "px");
+    			if (!current || dirty[0] & /*rowContainerHeight*/ 512) {
+    				set_style(div4, "height", /*rowContainerHeight*/ ctx[9] + "px");
     			}
 
     			if (dirty[0] & /*$allTimeRanges*/ 33554432) {
-    				const each_value_2 = /*$allTimeRanges*/ ctx[25];
+    				each_value_2 = /*$allTimeRanges*/ ctx[25];
     				group_outros();
     				each_blocks_2 = update_keyed_each(each_blocks_2, dirty, get_key_2, 1, ctx, each_value_2, each3_lookup, div5, outro_and_destroy_block, create_each_block_2, t5, get_each_context_2);
     				check_outros();
     			}
 
-    			if (dirty[0] & /*visibleTasks*/ 1048576) {
-    				const each_value_1 = /*visibleTasks*/ ctx[20];
+    			if (dirty[0] & /*visibleTasks*/ 4194304) {
+    				each_value_1 = /*visibleTasks*/ ctx[22];
     				group_outros();
     				each_blocks_1 = update_keyed_each(each_blocks_1, dirty, get_key_3, 1, ctx, each_value_1, each4_lookup, div5, outro_and_destroy_block, create_each_block_1$1, null, get_each_context_1$1);
     				check_outros();
     			}
 
-    			if (dirty[0] & /*ganttBodyModules, paddingTop, paddingBottom, visibleRows*/ 917568 | dirty[1] & /*$$restProps*/ 32768) {
+    			if (dirty[0] & /*ganttBodyModules, paddingTop, paddingBottom, visibleRows*/ 3146816 | dirty[1] & /*$$restProps*/ 32768) {
     				each_value = /*ganttBodyModules*/ ctx[6];
     				let i;
 
@@ -11443,20 +11470,20 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (!current || dirty[0] & /*$_width*/ 4194304) {
-    				set_style(div6, "width", /*$_width*/ ctx[22] + "px");
+    			if (!current || dirty[0] & /*$_width*/ 4096) {
+    				set_style(div6, "width", /*$_width*/ ctx[12] + "px");
     			}
 
-    			if (dirty[0] & /*zooming*/ 16384) {
-    				toggle_class(div7, "zooming", /*zooming*/ ctx[14]);
+    			if (dirty[0] & /*zooming*/ 262144) {
+    				toggle_class(div7, "zooming", /*zooming*/ ctx[18]);
     			}
 
-    			if (!current || dirty[0] & /*classes*/ 16 && div9_class_value !== (div9_class_value = "sg-gantt " + /*classes*/ ctx[4] + " svelte-12fxs8g")) {
+    			if (!current || dirty[0] & /*classes*/ 16 && div9_class_value !== (div9_class_value = "sg-gantt " + /*classes*/ ctx[4] + " svelte-8uspd")) {
     				attr(div9, "class", div9_class_value);
     			}
 
-    			if (dirty[0] & /*classes, disableTransition*/ 2097168) {
-    				toggle_class(div9, "sg-disable-transition", !/*disableTransition*/ ctx[21]);
+    			if (dirty[0] & /*classes, disableTransition*/ 8388624) {
+    				toggle_class(div9, "sg-disable-transition", !/*disableTransition*/ ctx[23]);
     			}
     		},
     		i(local) {
@@ -11536,7 +11563,7 @@ var app = (function () {
     				each_blocks_4[i].d();
     			}
 
-    			/*div2_binding*/ ctx[123](null);
+    			/*div2_binding*/ ctx[104](null);
     			div2_resize_listener();
     			destroy_component(columns_1);
 
@@ -11544,7 +11571,7 @@ var app = (function () {
     				each_blocks_3[i].d();
     			}
 
-    			/*div4_binding*/ ctx[125](null);
+    			/*div4_binding*/ ctx[106](null);
 
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
     				each_blocks_2[i].d();
@@ -11555,9 +11582,9 @@ var app = (function () {
     			}
 
     			destroy_each(each_blocks, detaching);
-    			/*div7_binding*/ ctx[126](null);
+    			/*div7_binding*/ ctx[107](null);
     			div7_resize_listener();
-    			/*div9_binding*/ ctx[128](null);
+    			/*div9_binding*/ ctx[109](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -11586,31 +11613,31 @@ var app = (function () {
     	];
 
     	let $$restProps = compute_rest_props($$props, omit_props_names);
-    	let $_rowHeight;
-    	let $_rowPadding;
-    	let $_from;
-    	let $_to;
-    	let $_minWidth;
-    	let $_fitWidth;
-    	let $_width;
-    	let $columnWidth;
     	let $dimensionsChanged;
     	let $taskStore;
-    	let $hoveredRow;
-    	let $selectedRow;
-    	let $rowStore;
-    	let $allTasks;
-    	let $allRows;
     	let $rowTaskCache;
     	let $visibleHeight;
+    	let $allRows;
+    	let $rowStore;
+    	let $allTasks;
+    	let $columnWidth;
+    	let $_width;
+    	let $_to;
+    	let $_from;
+    	let $_rowPadding;
+    	let $_fitWidth;
+    	let $_minWidth;
+    	let $selectedRow;
+    	let $hoveredRow;
+    	let $_rowHeight;
     	let $headerHeight;
     	let $allTimeRanges;
     	let $visibleWidth;
-    	component_subscribe($$self, taskStore, $$value => $$invalidate(105, $taskStore = $$value));
-    	component_subscribe($$self, rowStore, $$value => $$invalidate(108, $rowStore = $$value));
-    	component_subscribe($$self, allTasks, $$value => $$invalidate(109, $allTasks = $$value));
-    	component_subscribe($$self, allRows, $$value => $$invalidate(110, $allRows = $$value));
-    	component_subscribe($$self, rowTaskCache, $$value => $$invalidate(111, $rowTaskCache = $$value));
+    	component_subscribe($$self, taskStore, $$value => $$invalidate(96, $taskStore = $$value));
+    	component_subscribe($$self, rowTaskCache, $$value => $$invalidate(97, $rowTaskCache = $$value));
+    	component_subscribe($$self, allRows, $$value => $$invalidate(98, $allRows = $$value));
+    	component_subscribe($$self, rowStore, $$value => $$invalidate(99, $rowStore = $$value));
+    	component_subscribe($$self, allTasks, $$value => $$invalidate(112, $allTasks = $$value));
     	component_subscribe($$self, allTimeRanges, $$value => $$invalidate(25, $allTimeRanges = $$value));
 
     	var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
@@ -11655,8 +11682,6 @@ var app = (function () {
     	let rowContainer;
     	let scrollables = [];
     	let mounted = false;
-    	
-    	
     	let { rows } = $$props;
     	let { tasks = [] } = $$props;
     	let { timeRanges = [] } = $$props;
@@ -11664,35 +11689,35 @@ var app = (function () {
     	let { rowPadding = 6 } = $$props;
     	let { rowHeight = 52 } = $$props;
     	const _rowHeight = writable(rowHeight);
-    	component_subscribe($$self, _rowHeight, value => $$invalidate(97, $_rowHeight = value));
+    	component_subscribe($$self, _rowHeight, value => $$invalidate(117, $_rowHeight = value));
     	const _rowPadding = writable(rowPadding);
-    	component_subscribe($$self, _rowPadding, value => $$invalidate(98, $_rowPadding = value));
+    	component_subscribe($$self, _rowPadding, value => $$invalidate(103, $_rowPadding = value));
     	let { from } = $$props;
     	let { to } = $$props;
     	assertSet({ from, to });
     	const _from = writable(toDateNum(from));
-    	component_subscribe($$self, _from, value => $$invalidate(99, $_from = value));
+    	component_subscribe($$self, _from, value => $$invalidate(102, $_from = value));
     	const _to = writable(toDateNum(to));
-    	component_subscribe($$self, _to, value => $$invalidate(100, $_to = value));
+    	component_subscribe($$self, _to, value => $$invalidate(101, $_to = value));
     	let { minWidth = 800 } = $$props;
     	let { fitWidth = false } = $$props;
     	const _minWidth = writable(minWidth);
-    	component_subscribe($$self, _minWidth, value => $$invalidate(101, $_minWidth = value));
+    	component_subscribe($$self, _minWidth, value => $$invalidate(114, $_minWidth = value));
     	const _fitWidth = writable(fitWidth);
-    	component_subscribe($$self, _fitWidth, value => $$invalidate(102, $_fitWidth = value));
+    	component_subscribe($$self, _fitWidth, value => $$invalidate(113, $_fitWidth = value));
     	let { classes = [] } = $$props;
-    	let { headers = [{ unit: "day", format: "MMMM Do" }, { unit: "hour", format: "H:mm" }] } = $$props;
+    	let { headers = [{ unit: 'day', format: 'MMMM Do' }, { unit: 'hour', format: 'H:mm' }] } = $$props;
 
     	let { zoomLevels = [
     		{
-    			headers: [{ unit: "day", format: "DD.MM.YYYY" }, { unit: "hour", format: "HH" }],
+    			headers: [{ unit: 'day', format: 'DD.MM.YYYY' }, { unit: 'hour', format: 'HH' }],
     			minWidth: 800,
     			fitWidth: true
     		},
     		{
     			headers: [
-    				{ unit: "hour", format: "ddd D/M, H A" },
-    				{ unit: "minute", format: "mm", offset: 15 }
+    				{ unit: 'hour', format: 'ddd D/M, H A' },
+    				{ unit: 'minute', format: 'mm', offset: 15 }
     			],
     			minWidth: 5000,
     			fitWidth: false
@@ -11704,7 +11729,7 @@ var app = (function () {
     	let { resizeHandleWidth = 10 } = $$props;
     	let { onTaskButtonClick = null } = $$props;
     	let { dateAdapter = new NoopSvelteGanttDateAdapter() } = $$props;
-    	let { magnetUnit = "day" } = $$props;
+    	let { magnetUnit = 'day' } = $$props;
     	let { magnetOffset = 1 } = $$props;
     	let magnetDuration;
     	setMagnetDuration(magnetUnit, magnetOffset);
@@ -11715,7 +11740,7 @@ var app = (function () {
     		}
     	}
 
-    	let { columnUnit = "day" } = $$props;
+    	let { columnUnit = 'day' } = $$props;
     	let { columnOffset = 7 } = $$props;
     	let columnDuration;
     	setColumnDuration(columnUnit, columnOffset);
@@ -11736,7 +11761,7 @@ var app = (function () {
     	const visibleWidth = writable(null);
     	component_subscribe($$self, visibleWidth, value => $$invalidate(26, $visibleWidth = value));
     	const visibleHeight = writable(null);
-    	component_subscribe($$self, visibleHeight, value => $$invalidate(23, $visibleHeight = value));
+    	component_subscribe($$self, visibleHeight, value => $$invalidate(11, $visibleHeight = value));
     	const headerHeight = writable(null);
     	component_subscribe($$self, headerHeight, value => $$invalidate(24, $headerHeight = value));
 
@@ -11744,7 +11769,7 @@ var app = (function () {
     		return stretch && visible > min ? visible : min;
     	});
 
-    	component_subscribe($$self, _width, value => $$invalidate(22, $_width = value));
+    	component_subscribe($$self, _width, value => $$invalidate(12, $_width = value));
 
     	const columnService = {
     		getColumnByDate(date) {
@@ -11783,13 +11808,13 @@ var app = (function () {
     	};
 
     	const columnWidth = writable(getPositionByDate($_from + columnDuration, $_from, $_to, $_width) | 0);
-    	component_subscribe($$self, columnWidth, value => $$invalidate(103, $columnWidth = value));
+    	component_subscribe($$self, columnWidth, value => $$invalidate(100, $columnWidth = value));
     	let columnCount = Math.ceil($_width / $columnWidth);
     	let columns = getColumns($_from, columnCount, columnDuration, $columnWidth);
 
     	function getColumns(from, count, dur, width) {
-    		if (!isFinite(count)) throw new Error("column count is not a finite number");
-    		if (width <= 0) throw new Error("column width is not a positive number");
+    		if (!isFinite(count)) throw new Error('column count is not a finite number');
+    		if (width <= 0) throw new Error('column width is not a positive number');
     		let columns = [];
     		let columnFrom = from;
     		let left = 0;
@@ -11807,9 +11832,9 @@ var app = (function () {
     	}
 
     	const dimensionsChanged = derived([columnWidth, _from, _to], () => ({}));
-    	component_subscribe($$self, dimensionsChanged, value => $$invalidate(104, $dimensionsChanged = value));
+    	component_subscribe($$self, dimensionsChanged, value => $$invalidate(95, $dimensionsChanged = value));
 
-    	setContext("dimensions", {
+    	setContext('dimensions', {
     		from: _from,
     		to: _to,
     		width: _width,
@@ -11819,7 +11844,7 @@ var app = (function () {
     		dimensionsChanged
     	});
 
-    	setContext("options", {
+    	setContext('options', {
     		dateAdapter,
     		taskElementHook,
     		taskContent,
@@ -11832,11 +11857,11 @@ var app = (function () {
     	});
 
     	const hoveredRow = writable(null);
-    	component_subscribe($$self, hoveredRow, value => $$invalidate(106, $hoveredRow = value));
+    	component_subscribe($$self, hoveredRow, value => $$invalidate(116, $hoveredRow = value));
     	const selectedRow = writable(null);
-    	component_subscribe($$self, selectedRow, value => $$invalidate(107, $selectedRow = value));
+    	component_subscribe($$self, selectedRow, value => $$invalidate(115, $selectedRow = value));
     	const ganttContext = { scrollables, hoveredRow, selectedRow };
-    	setContext("gantt", ganttContext);
+    	setContext('gantt', ganttContext);
 
     	onMount(() => {
     		Object.assign(ganttContext, {
@@ -11845,18 +11870,18 @@ var app = (function () {
     			mainHeaderContainer
     		});
 
-    		api.registerEvent("tasks", "move");
-    		api.registerEvent("tasks", "select");
-    		api.registerEvent("tasks", "switchRow");
-    		api.registerEvent("tasks", "moveEnd");
-    		api.registerEvent("tasks", "change");
-    		api.registerEvent("tasks", "changed");
-    		api.registerEvent("gantt", "viewChanged");
-    		api.registerEvent("tasks", "dblclicked");
+    		api.registerEvent('tasks', 'move');
+    		api.registerEvent('tasks', 'select');
+    		api.registerEvent('tasks', 'switchRow');
+    		api.registerEvent('tasks', 'moveEnd');
+    		api.registerEvent('tasks', 'change');
+    		api.registerEvent('tasks', 'changed');
+    		api.registerEvent('gantt', 'viewChanged');
+    		api.registerEvent('tasks', 'dblclicked');
     		$$invalidate(87, mounted = true);
     	});
 
-    	onDelegatedEvent("click", "data-task-id", (event, data, target) => {
+    	onDelegatedEvent('click', 'data-task-id', (event, data, target) => {
     		const taskId = +data;
 
     		if (event.ctrlKey) {
@@ -11865,31 +11890,30 @@ var app = (function () {
     			selectionManager.selectSingle(taskId);
     		}
 
-    		api["tasks"].raise.select($taskStore.entities[taskId]);
+    		api['tasks'].raise.select($taskStore.entities[taskId]);
     	});
 
-    	onDelegatedEvent("mouseover", "data-row-id", (event, data, target) => {
-    		set_store_value(hoveredRow, $hoveredRow = +data);
+    	onDelegatedEvent('mouseover', 'data-row-id', (event, data, target) => {
+    		set_store_value(hoveredRow, $hoveredRow = +data, $hoveredRow);
     	});
 
-    	onDelegatedEvent("click", "data-row-id", (event, data, target) => {
-    		set_store_value(selectedRow, $selectedRow = +data);
+    	onDelegatedEvent('click', 'data-row-id', (event, data, target) => {
+    		set_store_value(selectedRow, $selectedRow = +data, $selectedRow);
     	});
 
     	onDestroy(() => {
-    		offDelegatedEvent("click", "data-task-id");
-    		offDelegatedEvent("click", "data-row-id");
+    		offDelegatedEvent('click', 'data-task-id');
+    		offDelegatedEvent('click', 'data-row-id');
     	});
 
     	let __scrollTop = 0;
-    	let __scrollLeft = 0;
 
     	function scrollable(node) {
     		const onscroll = event => {
     			const { scrollTop, scrollLeft } = node;
 
     			scrollables.forEach(scrollable => {
-    				if (scrollable.orientation === "horizontal") {
+    				if (scrollable.orientation === 'horizontal') {
     					scrollable.node.scrollLeft = scrollLeft;
     				} else {
     					scrollable.node.scrollTop = scrollTop;
@@ -11897,24 +11921,23 @@ var app = (function () {
     			});
 
     			$$invalidate(91, __scrollTop = scrollTop);
-    			__scrollLeft = scrollLeft;
     		};
 
-    		node.addEventListener("scroll", onscroll);
+    		node.addEventListener('scroll', onscroll);
 
     		return {
     			destroy() {
-    				node.removeEventListener("scroll", onscroll, false);
+    				node.removeEventListener('scroll', onscroll, false);
     			}
     		};
     	}
 
     	function horizontalScrollListener(node) {
-    		scrollables.push({ node, orientation: "horizontal" });
+    		scrollables.push({ node, orientation: 'horizontal' });
     	}
 
     	function onResize(event) {
-    		$$invalidate(1, tableWidth = event.detail.left);
+    		$$invalidate(3, tableWidth = event.detail.left);
     	}
 
     	let zoomLevel = 0;
@@ -11948,25 +11971,25 @@ var app = (function () {
     					const before = node.scrollLeft + mousepos.x;
     					const after = before * scale;
     					const scrollLeft = after - mousepos.x + node.clientWidth / 2;
-    					console.log("scrollLeft", scrollLeft);
-    					$$invalidate(2, columnUnit = options.columnUnit);
-    					$$invalidate(3, columnOffset = options.columnOffset);
-    					set_store_value(_minWidth, $_minWidth = options.minWidth);
-    					if (options.headers) $$invalidate(0, headers = options.headers);
-    					if (options.fitWidth) set_store_value(_fitWidth, $_fitWidth = options.fitWidth);
-    					api["gantt"].raise.viewChanged();
-    					$$invalidate(14, zooming = true);
+    					console.log('scrollLeft', scrollLeft);
+    					$$invalidate(0, columnUnit = options.columnUnit);
+    					$$invalidate(1, columnOffset = options.columnOffset);
+    					set_store_value(_minWidth, $_minWidth = options.minWidth, $_minWidth);
+    					if (options.headers) $$invalidate(2, headers = options.headers);
+    					if (options.fitWidth) set_store_value(_fitWidth, $_fitWidth = options.fitWidth, $_fitWidth);
+    					api['gantt'].raise.viewChanged();
+    					$$invalidate(18, zooming = true);
     					yield tick();
     					node.scrollLeft = scrollLeft;
-    					$$invalidate(14, zooming = false);
+    					$$invalidate(18, zooming = false);
     				}
     			}
     		});
     	}
 
     	function onDateSelected(event) {
-    		set_store_value(_from, $_from = event.detail.from);
-    		set_store_value(_to, $_to = event.detail.to);
+    		set_store_value(_from, $_from = event.detail.from, $_from);
+    		set_store_value(_to, $_to = event.detail.to, $_to);
     	}
 
     	function initRows(rowsData) {
@@ -12018,10 +12041,10 @@ var app = (function () {
 
     	function tickWithoutCSSTransition() {
     		return __awaiter(this, void 0, void 0, function* () {
-    			$$invalidate(21, disableTransition = false);
+    			$$invalidate(23, disableTransition = false);
     			yield tick();
     			ganttElement.offsetHeight; // force a reflow
-    			$$invalidate(21, disableTransition = true);
+    			$$invalidate(23, disableTransition = true);
     		});
     	}
 
@@ -12033,7 +12056,7 @@ var app = (function () {
     	const timeRangeFactory = new TimeRangeFactory(columnService);
     	const utils = new GanttUtils();
 
-    	setContext("services", {
+    	setContext('services', {
     		utils,
     		api,
     		dndManager,
@@ -12082,7 +12105,7 @@ var app = (function () {
     		selectionManager.clearSelection();
     	}
 
-    	function scrollToRow(id, scrollBehavior = "auto") {
+    	function scrollToRow(id, scrollBehavior = 'auto') {
     		const { scrollTop, clientHeight } = mainContainer;
     		const index = $allRows.findIndex(r => r.model.id == id);
     		if (index === -1) return;
@@ -12100,7 +12123,7 @@ var app = (function () {
     		}
     	}
 
-    	function scrollToTask(id, scrollBehavior = "auto") {
+    	function scrollToTask(id, scrollBehavior = 'auto') {
     		const { scrollLeft, scrollTop, clientWidth, clientHeight } = mainContainer;
     		const task = $taskStore.entities[id];
     		if (!task) return;
@@ -12181,8 +12204,9 @@ var app = (function () {
     	let disableTransition = true;
 
     	function div2_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(10, mainHeaderContainer = $$value);
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			mainHeaderContainer = $$value;
+    			$$invalidate(14, mainHeaderContainer);
     		});
     	}
 
@@ -12192,14 +12216,16 @@ var app = (function () {
     	}
 
     	function div4_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(12, rowContainer = $$value);
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			rowContainer = $$value;
+    			$$invalidate(16, rowContainer);
     		});
     	}
 
     	function div7_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(11, mainContainer = $$value);
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			mainContainer = $$value;
+    			$$invalidate(15, mainContainer);
     		});
     	}
 
@@ -12211,42 +12237,43 @@ var app = (function () {
     	}
 
     	function div9_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(9, ganttElement = $$value);
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			ganttElement = $$value;
+    			$$invalidate(13, ganttElement);
     		});
     	}
 
-    	$$self.$set = $$new_props => {
+    	$$self.$$set = $$new_props => {
     		$$props = assign(assign({}, $$props), exclude_internal_props($$new_props));
     		$$invalidate(46, $$restProps = compute_rest_props($$props, omit_props_names));
-    		if ("rows" in $$new_props) $$invalidate(50, rows = $$new_props.rows);
-    		if ("tasks" in $$new_props) $$invalidate(51, tasks = $$new_props.tasks);
-    		if ("timeRanges" in $$new_props) $$invalidate(52, timeRanges = $$new_props.timeRanges);
-    		if ("rowPadding" in $$new_props) $$invalidate(53, rowPadding = $$new_props.rowPadding);
-    		if ("rowHeight" in $$new_props) $$invalidate(54, rowHeight = $$new_props.rowHeight);
-    		if ("from" in $$new_props) $$invalidate(55, from = $$new_props.from);
-    		if ("to" in $$new_props) $$invalidate(56, to = $$new_props.to);
-    		if ("minWidth" in $$new_props) $$invalidate(57, minWidth = $$new_props.minWidth);
-    		if ("fitWidth" in $$new_props) $$invalidate(58, fitWidth = $$new_props.fitWidth);
-    		if ("classes" in $$new_props) $$invalidate(4, classes = $$new_props.classes);
-    		if ("headers" in $$new_props) $$invalidate(0, headers = $$new_props.headers);
-    		if ("zoomLevels" in $$new_props) $$invalidate(59, zoomLevels = $$new_props.zoomLevels);
-    		if ("taskContent" in $$new_props) $$invalidate(60, taskContent = $$new_props.taskContent);
-    		if ("tableWidth" in $$new_props) $$invalidate(1, tableWidth = $$new_props.tableWidth);
-    		if ("resizeHandleWidth" in $$new_props) $$invalidate(61, resizeHandleWidth = $$new_props.resizeHandleWidth);
-    		if ("onTaskButtonClick" in $$new_props) $$invalidate(62, onTaskButtonClick = $$new_props.onTaskButtonClick);
-    		if ("dateAdapter" in $$new_props) $$invalidate(63, dateAdapter = $$new_props.dateAdapter);
-    		if ("magnetUnit" in $$new_props) $$invalidate(64, magnetUnit = $$new_props.magnetUnit);
-    		if ("magnetOffset" in $$new_props) $$invalidate(65, magnetOffset = $$new_props.magnetOffset);
-    		if ("columnUnit" in $$new_props) $$invalidate(2, columnUnit = $$new_props.columnUnit);
-    		if ("columnOffset" in $$new_props) $$invalidate(3, columnOffset = $$new_props.columnOffset);
-    		if ("ganttTableModules" in $$new_props) $$invalidate(5, ganttTableModules = $$new_props.ganttTableModules);
-    		if ("ganttBodyModules" in $$new_props) $$invalidate(6, ganttBodyModules = $$new_props.ganttBodyModules);
-    		if ("reflectOnParentRows" in $$new_props) $$invalidate(66, reflectOnParentRows = $$new_props.reflectOnParentRows);
-    		if ("reflectOnChildRows" in $$new_props) $$invalidate(67, reflectOnChildRows = $$new_props.reflectOnChildRows);
-    		if ("columnStrokeColor" in $$new_props) $$invalidate(7, columnStrokeColor = $$new_props.columnStrokeColor);
-    		if ("columnStrokeWidth" in $$new_props) $$invalidate(8, columnStrokeWidth = $$new_props.columnStrokeWidth);
-    		if ("taskElementHook" in $$new_props) $$invalidate(68, taskElementHook = $$new_props.taskElementHook);
+    		if ('rows' in $$new_props) $$invalidate(50, rows = $$new_props.rows);
+    		if ('tasks' in $$new_props) $$invalidate(51, tasks = $$new_props.tasks);
+    		if ('timeRanges' in $$new_props) $$invalidate(52, timeRanges = $$new_props.timeRanges);
+    		if ('rowPadding' in $$new_props) $$invalidate(53, rowPadding = $$new_props.rowPadding);
+    		if ('rowHeight' in $$new_props) $$invalidate(54, rowHeight = $$new_props.rowHeight);
+    		if ('from' in $$new_props) $$invalidate(55, from = $$new_props.from);
+    		if ('to' in $$new_props) $$invalidate(56, to = $$new_props.to);
+    		if ('minWidth' in $$new_props) $$invalidate(57, minWidth = $$new_props.minWidth);
+    		if ('fitWidth' in $$new_props) $$invalidate(58, fitWidth = $$new_props.fitWidth);
+    		if ('classes' in $$new_props) $$invalidate(4, classes = $$new_props.classes);
+    		if ('headers' in $$new_props) $$invalidate(2, headers = $$new_props.headers);
+    		if ('zoomLevels' in $$new_props) $$invalidate(59, zoomLevels = $$new_props.zoomLevels);
+    		if ('taskContent' in $$new_props) $$invalidate(60, taskContent = $$new_props.taskContent);
+    		if ('tableWidth' in $$new_props) $$invalidate(3, tableWidth = $$new_props.tableWidth);
+    		if ('resizeHandleWidth' in $$new_props) $$invalidate(61, resizeHandleWidth = $$new_props.resizeHandleWidth);
+    		if ('onTaskButtonClick' in $$new_props) $$invalidate(62, onTaskButtonClick = $$new_props.onTaskButtonClick);
+    		if ('dateAdapter' in $$new_props) $$invalidate(63, dateAdapter = $$new_props.dateAdapter);
+    		if ('magnetUnit' in $$new_props) $$invalidate(64, magnetUnit = $$new_props.magnetUnit);
+    		if ('magnetOffset' in $$new_props) $$invalidate(65, magnetOffset = $$new_props.magnetOffset);
+    		if ('columnUnit' in $$new_props) $$invalidate(0, columnUnit = $$new_props.columnUnit);
+    		if ('columnOffset' in $$new_props) $$invalidate(1, columnOffset = $$new_props.columnOffset);
+    		if ('ganttTableModules' in $$new_props) $$invalidate(5, ganttTableModules = $$new_props.ganttTableModules);
+    		if ('ganttBodyModules' in $$new_props) $$invalidate(6, ganttBodyModules = $$new_props.ganttBodyModules);
+    		if ('reflectOnParentRows' in $$new_props) $$invalidate(66, reflectOnParentRows = $$new_props.reflectOnParentRows);
+    		if ('reflectOnChildRows' in $$new_props) $$invalidate(67, reflectOnChildRows = $$new_props.reflectOnChildRows);
+    		if ('columnStrokeColor' in $$new_props) $$invalidate(7, columnStrokeColor = $$new_props.columnStrokeColor);
+    		if ('columnStrokeWidth' in $$new_props) $$invalidate(8, columnStrokeWidth = $$new_props.columnStrokeWidth);
+    		if ('taskElementHook' in $$new_props) $$invalidate(68, taskElementHook = $$new_props.taskElementHook);
     	};
 
     	$$self.$$.update = () => {
@@ -12263,25 +12290,25 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608) {
-    			 set_store_value(_rowHeight, $_rowHeight = rowHeight);
+    			 set_store_value(_rowHeight, $_rowHeight = rowHeight, $_rowHeight);
     		}
 
     		if ($$self.$$.dirty[1] & /*rowPadding*/ 4194304) {
-    			 set_store_value(_rowPadding, $_rowPadding = rowPadding);
+    			 set_store_value(_rowPadding, $_rowPadding = rowPadding, $_rowPadding);
     		}
 
     		if ($$self.$$.dirty[1] & /*from*/ 16777216) {
-    			 set_store_value(_from, $_from = toDateNum(from));
+    			 set_store_value(_from, $_from = toDateNum(from), $_from);
     		}
 
     		if ($$self.$$.dirty[1] & /*to*/ 33554432) {
-    			 set_store_value(_to, $_to = toDateNum(to));
+    			 set_store_value(_to, $_to = toDateNum(to), $_to);
     		}
 
     		if ($$self.$$.dirty[1] & /*minWidth, fitWidth*/ 201326592) {
     			 {
-    				set_store_value(_minWidth, $_minWidth = minWidth);
-    				set_store_value(_fitWidth, $_fitWidth = fitWidth);
+    				set_store_value(_minWidth, $_minWidth = minWidth, $_minWidth);
+    				set_store_value(_fitWidth, $_fitWidth = fitWidth, $_fitWidth);
     			}
     		}
 
@@ -12289,23 +12316,23 @@ var app = (function () {
     			 setMagnetDuration(magnetUnit, magnetOffset);
     		}
 
-    		if ($$self.$$.dirty[0] & /*columnUnit, columnOffset*/ 12) {
+    		if ($$self.$$.dirty[0] & /*columnUnit, columnOffset*/ 3) {
     			 setColumnDuration(columnUnit, columnOffset);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$_width*/ 4194304 | $$self.$$.dirty[2] & /*columnDuration*/ 134217728 | $$self.$$.dirty[3] & /*$_from, $_to*/ 192) {
-    			 set_store_value(columnWidth, $columnWidth = getPositionByDate($_from + columnDuration, $_from, $_to, $_width) | 0);
+    		if ($$self.$$.dirty[0] & /*$_width*/ 4096 | $$self.$$.dirty[2] & /*columnDuration*/ 134217728 | $$self.$$.dirty[3] & /*$_from, $_to*/ 768) {
+    			 set_store_value(columnWidth, $columnWidth = getPositionByDate($_from + columnDuration, $_from, $_to, $_width) | 0, $columnWidth);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$_width*/ 4194304 | $$self.$$.dirty[3] & /*$columnWidth*/ 1024) {
+    		if ($$self.$$.dirty[0] & /*$_width*/ 4096 | $$self.$$.dirty[3] & /*$columnWidth*/ 128) {
     			 $$invalidate(90, columnCount = Math.ceil($_width / $columnWidth));
     		}
 
-    		if ($$self.$$.dirty[2] & /*columnCount, columnDuration*/ 402653184 | $$self.$$.dirty[3] & /*$_from, $columnWidth*/ 1088) {
-    			 $$invalidate(13, columns = getColumns($_from, columnCount, columnDuration, $columnWidth));
+    		if ($$self.$$.dirty[2] & /*columnCount, columnDuration*/ 402653184 | $$self.$$.dirty[3] & /*$_from, $columnWidth*/ 640) {
+    			 $$invalidate(17, columns = getColumns($_from, columnCount, columnDuration, $columnWidth));
     		}
 
-    		if ($$self.$$.dirty[3] & /*$dimensionsChanged*/ 2048) {
+    		if ($$self.$$.dirty[3] & /*$dimensionsChanged*/ 4) {
     			 {
     				if ($dimensionsChanged) {
     					refreshTasks();
@@ -12314,7 +12341,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[3] & /*$_rowPadding, $rowStore*/ 32800) {
+    		if ($$self.$$.dirty[3] & /*$_rowPadding, $rowStore*/ 1088) {
     			 {
     				$$invalidate(47, taskFactory.rowPadding = $_rowPadding, taskFactory);
     				$$invalidate(47, taskFactory.rowEntities = $rowStore.entities, taskFactory);
@@ -12325,7 +12352,7 @@ var app = (function () {
     			 $$invalidate(48, rowFactory.rowHeight = rowHeight, rowFactory);
     		}
 
-    		if ($$self.$$.dirty[0] & /*$_width*/ 4194304 | $$self.$$.dirty[2] & /*magnetOffset, magnetUnit, magnetDuration, columnCount, columnDuration*/ 469762060 | $$self.$$.dirty[3] & /*$_from, $_to, $columnWidth*/ 1216) {
+    		if ($$self.$$.dirty[0] & /*$_width*/ 4096 | $$self.$$.dirty[2] & /*magnetOffset, magnetUnit, magnetDuration, columnCount, columnDuration*/ 469762060 | $$self.$$.dirty[3] & /*$_from, $_to, $columnWidth*/ 896) {
     			 {
     				$$invalidate(49, utils.from = $_from, utils);
     				$$invalidate(49, utils.to = $_to, utils);
@@ -12338,39 +12365,39 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[3] & /*$allRows*/ 131072) {
-    			 $$invalidate(94, filteredRows = $allRows.filter(row => !row.hidden));
+    		if ($$self.$$.dirty[3] & /*$allRows*/ 32) {
+    			 $$invalidate(92, filteredRows = $allRows.filter(row => !row.hidden));
     		}
 
-    		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[3] & /*filteredRows*/ 2) {
-    			 $$invalidate(16, rowContainerHeight = filteredRows.length * rowHeight);
+    		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[2] & /*filteredRows*/ 1073741824) {
+    			 $$invalidate(9, rowContainerHeight = filteredRows.length * rowHeight);
     		}
 
-    		if ($$self.$$.dirty[0] & /*rowContainerHeight, $visibleHeight*/ 8454144) {
-    			 $$invalidate(15, rightScrollbarVisible = rowContainerHeight > $visibleHeight);
+    		if ($$self.$$.dirty[0] & /*rowContainerHeight, $visibleHeight*/ 2560) {
+    			 $$invalidate(19, rightScrollbarVisible = rowContainerHeight > $visibleHeight);
     		}
 
     		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[2] & /*__scrollTop*/ 536870912) {
-    			 $$invalidate(95, startIndex = Math.floor(__scrollTop / rowHeight));
+    			 $$invalidate(93, startIndex = Math.floor(__scrollTop / rowHeight));
     		}
 
-    		if ($$self.$$.dirty[0] & /*$visibleHeight*/ 8388608 | $$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[3] & /*startIndex, filteredRows*/ 6) {
-    			 $$invalidate(96, endIndex = Math.min(startIndex + Math.ceil($visibleHeight / rowHeight), filteredRows.length - 1));
+    		if ($$self.$$.dirty[0] & /*$visibleHeight*/ 2048 | $$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[2] & /*filteredRows*/ 1073741824 | $$self.$$.dirty[3] & /*startIndex*/ 1) {
+    			 $$invalidate(94, endIndex = Math.min(startIndex + Math.ceil($visibleHeight / rowHeight), filteredRows.length - 1));
     		}
 
-    		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[3] & /*startIndex*/ 4) {
-    			 $$invalidate(17, paddingTop = startIndex * rowHeight);
+    		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[3] & /*startIndex*/ 1) {
+    			 $$invalidate(20, paddingTop = startIndex * rowHeight);
     		}
 
-    		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[3] & /*filteredRows, endIndex*/ 10) {
-    			 $$invalidate(18, paddingBottom = (filteredRows.length - endIndex - 1) * rowHeight);
+    		if ($$self.$$.dirty[1] & /*rowHeight*/ 8388608 | $$self.$$.dirty[2] & /*filteredRows*/ 1073741824 | $$self.$$.dirty[3] & /*endIndex*/ 2) {
+    			 $$invalidate(21, paddingBottom = (filteredRows.length - endIndex - 1) * rowHeight);
     		}
 
-    		if ($$self.$$.dirty[3] & /*filteredRows, startIndex, endIndex*/ 14) {
-    			 $$invalidate(19, visibleRows = filteredRows.slice(startIndex, endIndex + 1));
+    		if ($$self.$$.dirty[2] & /*filteredRows*/ 1073741824 | $$self.$$.dirty[3] & /*startIndex, endIndex*/ 3) {
+    			 $$invalidate(10, visibleRows = filteredRows.slice(startIndex, endIndex + 1));
     		}
 
-    		if ($$self.$$.dirty[0] & /*visibleRows*/ 524288 | $$self.$$.dirty[3] & /*$rowTaskCache, $taskStore*/ 266240) {
+    		if ($$self.$$.dirty[0] & /*visibleRows*/ 1024 | $$self.$$.dirty[3] & /*$rowTaskCache, $taskStore*/ 24) {
     			 {
     				const tasks = [];
 
@@ -12382,25 +12409,29 @@ var app = (function () {
     					}
     				});
 
-    				$$invalidate(20, visibleTasks = tasks);
+    				$$invalidate(22, visibleTasks = tasks);
     			}
     		}
 
-    		if ($$self.$$.dirty[3] & /*$dimensionsChanged*/ 2048) {
+    		if ($$self.$$.dirty[3] & /*$dimensionsChanged*/ 4) {
     			 if ($dimensionsChanged) tickWithoutCSSTransition();
     		}
     	};
 
     	return [
-    		headers,
-    		tableWidth,
     		columnUnit,
     		columnOffset,
+    		headers,
+    		tableWidth,
     		classes,
     		ganttTableModules,
     		ganttBodyModules,
     		columnStrokeColor,
     		columnStrokeWidth,
+    		rowContainerHeight,
+    		visibleRows,
+    		$visibleHeight,
+    		$_width,
     		ganttElement,
     		mainHeaderContainer,
     		mainContainer,
@@ -12408,14 +12439,10 @@ var app = (function () {
     		columns,
     		zooming,
     		rightScrollbarVisible,
-    		rowContainerHeight,
     		paddingTop,
     		paddingBottom,
-    		visibleRows,
     		visibleTasks,
     		disableTransition,
-    		$_width,
-    		$visibleHeight,
     		$headerHeight,
     		$allTimeRanges,
     		$visibleWidth,
@@ -12484,37 +12511,18 @@ var app = (function () {
     		columnDuration,
     		columnCount,
     		__scrollTop,
-    		__scrollLeft,
-    		zoomLevel,
     		filteredRows,
     		startIndex,
     		endIndex,
-    		$_rowHeight,
-    		$_rowPadding,
-    		$_from,
-    		$_to,
-    		$_minWidth,
-    		$_fitWidth,
-    		$columnWidth,
     		$dimensionsChanged,
     		$taskStore,
-    		$hoveredRow,
-    		$selectedRow,
-    		$rowStore,
-    		$allTasks,
-    		$allRows,
     		$rowTaskCache,
-    		__awaiter,
-    		scrollables,
-    		setMagnetDuration,
-    		setColumnDuration,
-    		getColumns,
-    		ganttContext,
-    		initRows,
-    		initTasks,
-    		initTimeRanges,
-    		tickWithoutCSSTransition,
-    		selectionManager,
+    		$allRows,
+    		$rowStore,
+    		$columnWidth,
+    		$_to,
+    		$_from,
+    		$_rowPadding,
     		div2_binding,
     		div2_elementresize_handler,
     		div4_binding,
@@ -12545,17 +12553,17 @@ var app = (function () {
     				minWidth: 57,
     				fitWidth: 58,
     				classes: 4,
-    				headers: 0,
+    				headers: 2,
     				zoomLevels: 59,
     				taskContent: 60,
-    				tableWidth: 1,
+    				tableWidth: 3,
     				resizeHandleWidth: 61,
     				onTaskButtonClick: 62,
     				dateAdapter: 63,
     				magnetUnit: 64,
     				magnetOffset: 65,
-    				columnUnit: 2,
-    				columnOffset: 3,
+    				columnUnit: 0,
+    				columnOffset: 1,
     				ganttTableModules: 5,
     				ganttBodyModules: 6,
     				reflectOnParentRows: 66,
@@ -12585,6 +12593,7 @@ var app = (function () {
     				getTask: 85,
     				getTasks: 86
     			},
+    			null,
     			[-1, -1, -1, -1, -1]
     		);
     	}
@@ -12674,10 +12683,10 @@ var app = (function () {
     	}
     }
 
-    var css_248z$b = ".sg-tree-expander.svelte-1tpezbv{cursor:pointer;min-width:1.4em;display:flex;justify-content:center;align-items:center}.sg-cell-inner.svelte-1tpezbv{display:flex}";
+    var css_248z$b = ".sg-tree-expander.svelte-1tk4vqn{cursor:pointer;min-width:1.4em;display:flex;justify-content:center;align-items:center}.sg-cell-inner.svelte-1tk4vqn{display:flex}";
     styleInject(css_248z$b);
 
-    /* src\modules\table\TableTreeCell.svelte generated by Svelte v3.23.0 */
+    /* src\modules\table\TableTreeCell.svelte generated by Svelte v3.46.4 */
 
     function create_if_block$2$1(ctx) {
     	let div;
@@ -12696,7 +12705,7 @@ var app = (function () {
     		c() {
     			div = element("div");
     			if_block.c();
-    			attr(div, "class", "sg-tree-expander svelte-1tpezbv");
+    			attr(div, "class", "sg-tree-expander svelte-1tk4vqn");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
@@ -12727,7 +12736,7 @@ var app = (function () {
     	};
     }
 
-    // (20:12) {:else}
+    // (19:12) {:else}
     function create_else_block$1(ctx) {
     	let i;
 
@@ -12745,7 +12754,7 @@ var app = (function () {
     	};
     }
 
-    // (18:12) {#if row.expanded}
+    // (17:12) {#if row.expanded}
     function create_if_block_1$1(ctx) {
     	let i;
 
@@ -12768,8 +12777,8 @@ var app = (function () {
     	let t;
     	let current;
     	let if_block = /*row*/ ctx[0].children && create_if_block$2$1(ctx);
-    	const default_slot_template = /*$$slots*/ ctx[4].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[3], null);
+    	const default_slot_template = /*#slots*/ ctx[3].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[2], null);
 
     	return {
     		c() {
@@ -12777,7 +12786,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t = space();
     			if (default_slot) default_slot.c();
-    			attr(div, "class", "sg-cell-inner svelte-1tpezbv");
+    			attr(div, "class", "sg-cell-inner svelte-1tk4vqn");
     			set_style(div, "padding-left", /*row*/ ctx[0].childLevel * 3 + "em");
     		},
     		m(target, anchor) {
@@ -12806,8 +12815,17 @@ var app = (function () {
     			}
 
     			if (default_slot) {
-    				if (default_slot.p && dirty & /*$$scope*/ 8) {
-    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[3], dirty, null, null);
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 4)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[2],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[2])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[2], dirty, null),
+    						null
+    					);
     				}
     			}
 
@@ -12833,26 +12851,24 @@ var app = (function () {
     }
 
     function instance$9($$self, $$props, $$invalidate) {
-    	
+    	let { $$slots: slots = {}, $$scope } = $$props;
     	let { row } = $$props;
     	const dispatch = createEventDispatcher();
 
     	function onExpandToggle() {
     		if (row.expanded) {
-    			dispatch("rowCollapsed", { row });
+    			dispatch('rowCollapsed', { row });
     		} else {
-    			dispatch("rowExpanded", { row });
+    			dispatch('rowExpanded', { row });
     		}
     	}
 
-    	let { $$slots = {}, $$scope } = $$props;
-
-    	$$self.$set = $$props => {
-    		if ("row" in $$props) $$invalidate(0, row = $$props.row);
-    		if ("$$scope" in $$props) $$invalidate(3, $$scope = $$props.$$scope);
+    	$$self.$$set = $$props => {
+    		if ('row' in $$props) $$invalidate(0, row = $$props.row);
+    		if ('$$scope' in $$props) $$invalidate(2, $$scope = $$props.$$scope);
     	};
 
-    	return [row, onExpandToggle, dispatch, $$scope, $$slots];
+    	return [row, onExpandToggle, $$scope, slots];
     }
 
     class TableTreeCell extends SvelteComponent {
@@ -12862,10 +12878,10 @@ var app = (function () {
     	}
     }
 
-    var css_248z$c = ".sg-table-row.svelte-8jjd7n{display:inline-flex;min-width:100%;align-items:stretch;position:relative;font-weight:400;font-size:14px}.sg-table-cell.svelte-8jjd7n{border-left:1px solid #eee}.sg-table-body-cell.svelte-8jjd7n{border-bottom:#efefef 1px solid;background-color:rgb(255, 255, 255);font-weight:bold}.sg-resource-image.svelte-8jjd7n{width:2.4em;height:2.4em;border-radius:50%;margin-right:.6em;background:#047c69}.sg-resource-info.svelte-8jjd7n{flex:1;height:100%;display:flex;flex-direction:row;align-items:center}.sg-table-icon.svelte-8jjd7n{margin-right:0.5em}";
+    var css_248z$c = ".sg-table-row.svelte-19dszbj{display:inline-flex;min-width:100%;align-items:stretch;position:relative;font-weight:400;font-size:14px}.sg-table-cell.svelte-19dszbj{border-left:1px solid #eee}.sg-table-body-cell.svelte-19dszbj{border-bottom:#efefef 1px solid;background-color:rgb(255, 255, 255);font-weight:bold}.sg-resource-image.svelte-19dszbj{width:2.4em;height:2.4em;border-radius:50%;margin-right:.6em;background:#047c69}.sg-resource-info.svelte-19dszbj{flex:1;height:100%;display:flex;flex-direction:row;align-items:center}.sg-table-icon.svelte-19dszbj{margin-right:0.5em}";
     styleInject(css_248z$c);
 
-    /* src\modules\table\TableRow.svelte generated by Svelte v3.23.0 */
+    /* src\modules\table\TableRow.svelte generated by Svelte v3.46.4 */
 
     function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -12873,7 +12889,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (40:12) {:else}
+    // (38:12) {:else}
     function create_else_block_1(ctx) {
     	let t;
     	let if_block1_anchor;
@@ -12882,7 +12898,7 @@ var app = (function () {
     	function select_block_type_2(ctx, dirty) {
     		if (/*row*/ ctx[1].model.headerHtml) return create_if_block_4$1;
     		if (/*header*/ ctx[12].renderer) return create_if_block_5;
-    		if (/*header*/ ctx[12].type === "resourceInfo") return create_if_block_6;
+    		if (/*header*/ ctx[12].type === 'resourceInfo') return create_if_block_6;
     		return create_else_block_2;
     	}
 
@@ -12939,11 +12955,12 @@ var app = (function () {
     	};
     }
 
-    // (24:12) {#if header.type == 'tree'}
+    // (22:12) {#if header.type == 'tree'}
     function create_if_block$3(ctx) {
+    	let tabletreecell;
     	let current;
 
-    	const tabletreecell = new TableTreeCell({
+    	tabletreecell = new TableTreeCell({
     			props: {
     				row: /*row*/ ctx[1],
     				$$slots: { default: [create_default_slot$1] },
@@ -12951,8 +12968,8 @@ var app = (function () {
     			}
     		});
 
-    	tabletreecell.$on("rowCollapsed", /*rowCollapsed_handler*/ ctx[10]);
-    	tabletreecell.$on("rowExpanded", /*rowExpanded_handler*/ ctx[11]);
+    	tabletreecell.$on("rowCollapsed", /*rowCollapsed_handler*/ ctx[8]);
+    	tabletreecell.$on("rowExpanded", /*rowExpanded_handler*/ ctx[9]);
 
     	return {
     		c() {
@@ -12987,7 +13004,7 @@ var app = (function () {
     	};
     }
 
-    // (41:16) {#if row.model.iconClass}
+    // (39:16) {#if row.model.iconClass}
     function create_if_block_7(ctx) {
     	let div;
     	let i;
@@ -12997,15 +13014,15 @@ var app = (function () {
     		c() {
     			div = element("div");
     			i = element("i");
-    			attr(i, "class", i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-8jjd7n"));
-    			attr(div, "class", "sg-table-icon svelte-8jjd7n");
+    			attr(i, "class", i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-19dszbj"));
+    			attr(div, "class", "sg-table-icon svelte-19dszbj");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
     			append(div, i);
     		},
     		p(ctx, dirty) {
-    			if (dirty & /*row*/ 2 && i_class_value !== (i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-8jjd7n"))) {
+    			if (dirty & /*row*/ 2 && i_class_value !== (i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-19dszbj"))) {
     				attr(i, "class", i_class_value);
     			}
     		},
@@ -13015,7 +13032,7 @@ var app = (function () {
     	};
     }
 
-    // (56:16) {:else}
+    // (54:16) {:else}
     function create_else_block_2(ctx) {
     	let t_value = /*row*/ ctx[1].model[/*header*/ ctx[12].property] + "";
     	let t;
@@ -13036,7 +13053,7 @@ var app = (function () {
     	};
     }
 
-    // (51:57) 
+    // (49:57) 
     function create_if_block_6(ctx) {
     	let img;
     	let img_src_value;
@@ -13051,8 +13068,8 @@ var app = (function () {
     			t0 = space();
     			div = element("div");
     			t1 = text(t1_value);
-    			attr(img, "class", "sg-resource-image svelte-8jjd7n");
-    			if (img.src !== (img_src_value = /*row*/ ctx[1].model.imageSrc)) attr(img, "src", img_src_value);
+    			attr(img, "class", "sg-resource-image svelte-19dszbj");
+    			if (!src_url_equal(img.src, img_src_value = /*row*/ ctx[1].model.imageSrc)) attr(img, "src", img_src_value);
     			attr(img, "alt", "");
     			attr(div, "class", "sg-resource-title");
     		},
@@ -13063,7 +13080,7 @@ var app = (function () {
     			append(div, t1);
     		},
     		p(ctx, dirty) {
-    			if (dirty & /*row*/ 2 && img.src !== (img_src_value = /*row*/ ctx[1].model.imageSrc)) {
+    			if (dirty & /*row*/ 2 && !src_url_equal(img.src, img_src_value = /*row*/ ctx[1].model.imageSrc)) {
     				attr(img, "src", img_src_value);
     			}
 
@@ -13077,49 +13094,59 @@ var app = (function () {
     	};
     }
 
-    // (49:42) 
+    // (47:42) 
     function create_if_block_5(ctx) {
     	let html_tag;
     	let raw_value = /*header*/ ctx[12].renderer(/*row*/ ctx[1]) + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(null);
+    			html_tag = new HtmlTag();
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
     			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty & /*headers, row*/ 3 && raw_value !== (raw_value = /*header*/ ctx[12].renderer(/*row*/ ctx[1]) + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
     }
 
-    // (47:16) {#if row.model.headerHtml}
+    // (45:16) {#if row.model.headerHtml}
     function create_if_block_4$1(ctx) {
     	let html_tag;
     	let raw_value = /*row*/ ctx[1].model.headerHtml + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(null);
+    			html_tag = new HtmlTag();
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
     			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty & /*row*/ 2 && raw_value !== (raw_value = /*row*/ ctx[1].model.headerHtml + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
     }
 
-    // (26:20) {#if row.model.iconClass}
+    // (24:20) {#if row.model.iconClass}
     function create_if_block_3$1(ctx) {
     	let div;
     	let i;
@@ -13129,15 +13156,15 @@ var app = (function () {
     		c() {
     			div = element("div");
     			i = element("i");
-    			attr(i, "class", i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-8jjd7n"));
-    			attr(div, "class", "sg-table-icon svelte-8jjd7n");
+    			attr(i, "class", i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-19dszbj"));
+    			attr(div, "class", "sg-table-icon svelte-19dszbj");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
     			append(div, i);
     		},
     		p(ctx, dirty) {
-    			if (dirty & /*row*/ 2 && i_class_value !== (i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-8jjd7n"))) {
+    			if (dirty & /*row*/ 2 && i_class_value !== (i_class_value = "" + (null_to_empty(/*row*/ ctx[1].model.iconClass) + " svelte-19dszbj"))) {
     				attr(i, "class", i_class_value);
     			}
     		},
@@ -13147,7 +13174,7 @@ var app = (function () {
     	};
     }
 
-    // (36:20) {:else}
+    // (34:20) {:else}
     function create_else_block$2(ctx) {
     	let t_value = /*row*/ ctx[1].model[/*header*/ ctx[12].property] + "";
     	let t;
@@ -13168,49 +13195,59 @@ var app = (function () {
     	};
     }
 
-    // (34:46) 
+    // (32:46) 
     function create_if_block_2$1(ctx) {
     	let html_tag;
     	let raw_value = /*header*/ ctx[12].renderer(/*row*/ ctx[1]) + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(null);
+    			html_tag = new HtmlTag();
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
     			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty & /*headers, row*/ 3 && raw_value !== (raw_value = /*header*/ ctx[12].renderer(/*row*/ ctx[1]) + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
     }
 
-    // (32:20) {#if row.model.headerHtml}
+    // (30:20) {#if row.model.headerHtml}
     function create_if_block_1$2(ctx) {
     	let html_tag;
     	let raw_value = /*row*/ ctx[1].model.headerHtml + "";
+    	let html_anchor;
 
     	return {
     		c() {
-    			html_tag = new HtmlTag(null);
+    			html_tag = new HtmlTag();
+    			html_anchor = empty();
+    			html_tag.a = html_anchor;
     		},
     		m(target, anchor) {
     			html_tag.m(raw_value, target, anchor);
+    			insert(target, html_anchor, anchor);
     		},
     		p(ctx, dirty) {
     			if (dirty & /*row*/ 2 && raw_value !== (raw_value = /*row*/ ctx[1].model.headerHtml + "")) html_tag.p(raw_value);
     		},
     		d(detaching) {
+    			if (detaching) detach(html_anchor);
     			if (detaching) html_tag.d();
     		}
     	};
     }
 
-    // (25:16) <TableTreeCell on:rowCollapsed on:rowExpanded {row}>
+    // (23:16) <TableTreeCell on:rowCollapsed on:rowExpanded {row}>
     function create_default_slot$1(ctx) {
     	let t;
     	let if_block1_anchor;
@@ -13273,7 +13310,7 @@ var app = (function () {
     	};
     }
 
-    // (22:4) {#each headers as header}
+    // (20:4) {#each headers as header}
     function create_each_block$3(ctx) {
     	let div;
     	let current_block_type_index;
@@ -13284,7 +13321,7 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*header*/ ctx[12].type == "tree") return 0;
+    		if (/*header*/ ctx[12].type == 'tree') return 0;
     		return 1;
     	}
 
@@ -13296,7 +13333,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			t = space();
-    			attr(div, "class", "sg-table-body-cell sg-table-cell svelte-8jjd7n");
+    			attr(div, "class", "sg-table-body-cell sg-table-cell svelte-19dszbj");
     			set_style(div, "width", /*header*/ ctx[12].width + "px");
     		},
     		m(target, anchor) {
@@ -13324,6 +13361,8 @@ var app = (function () {
     				if (!if_block) {
     					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     					if_block.c();
+    				} else {
+    					if_block.p(ctx, dirty);
     				}
 
     				transition_in(if_block, 1);
@@ -13376,7 +13415,7 @@ var app = (function () {
 
     			attr(div, "data-row-id", div_data_row_id_value = /*row*/ ctx[1].model.id);
     			set_style(div, "height", /*$rowHeight*/ ctx[2] + "px");
-    			attr(div, "class", div_class_value = "sg-table-row " + (/*row*/ ctx[1].model.classes || "") + " svelte-8jjd7n");
+    			attr(div, "class", div_class_value = "sg-table-row " + (/*row*/ ctx[1].model.classes || '') + " svelte-19dszbj");
     			toggle_class(div, "sg-row-expanded", /*row*/ ctx[1].expanded);
     			toggle_class(div, "sg-hover", /*$hoveredRow*/ ctx[3] == /*row*/ ctx[1].model.id);
     			toggle_class(div, "sg-selected", /*$selectedRow*/ ctx[4] == /*row*/ ctx[1].model.id);
@@ -13426,7 +13465,7 @@ var app = (function () {
     				set_style(div, "height", /*$rowHeight*/ ctx[2] + "px");
     			}
 
-    			if (!current || dirty & /*row*/ 2 && div_class_value !== (div_class_value = "sg-table-row " + (/*row*/ ctx[1].model.classes || "") + " svelte-8jjd7n")) {
+    			if (!current || dirty & /*row*/ 2 && div_class_value !== (div_class_value = "sg-table-row " + (/*row*/ ctx[1].model.classes || '') + " svelte-19dszbj")) {
     				attr(div, "class", div_class_value);
     			}
 
@@ -13471,37 +13510,34 @@ var app = (function () {
     	let $rowHeight;
     	let $hoveredRow;
     	let $selectedRow;
-    	
-    	
     	let { headers = null } = $$props;
     	let { row = null } = $$props;
-    	const { rowHeight } = getContext("options");
+    	const { rowHeight } = getContext('options');
     	component_subscribe($$self, rowHeight, value => $$invalidate(2, $rowHeight = value));
-    	const { hoveredRow, selectedRow } = getContext("gantt");
+    	const { hoveredRow, selectedRow } = getContext('gantt');
     	component_subscribe($$self, hoveredRow, value => $$invalidate(3, $hoveredRow = value));
     	component_subscribe($$self, selectedRow, value => $$invalidate(4, $selectedRow = value));
-    	const dispatch = createEventDispatcher();
-    	let treeIndentationStyle = "";
+    	createEventDispatcher();
 
     	function rowCollapsed_handler(event) {
-    		bubble($$self, event);
+    		bubble.call(this, $$self, event);
     	}
 
     	function rowExpanded_handler(event) {
-    		bubble($$self, event);
+    		bubble.call(this, $$self, event);
     	}
 
-    	$$self.$set = $$props => {
-    		if ("headers" in $$props) $$invalidate(0, headers = $$props.headers);
-    		if ("row" in $$props) $$invalidate(1, row = $$props.row);
+    	$$self.$$set = $$props => {
+    		if ('headers' in $$props) $$invalidate(0, headers = $$props.headers);
+    		if ('row' in $$props) $$invalidate(1, row = $$props.row);
     	};
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*row*/ 2) {
     			 {
-    				treeIndentationStyle = row.parent
+    				row.parent
     				? `padding-left: ${row.childLevel * 3}em;`
-    				: "";
+    				: '';
     			}
     		}
     	};
@@ -13515,8 +13551,6 @@ var app = (function () {
     		rowHeight,
     		hoveredRow,
     		selectedRow,
-    		treeIndentationStyle,
-    		dispatch,
     		rowCollapsed_handler,
     		rowExpanded_handler
     	];
@@ -13529,10 +13563,10 @@ var app = (function () {
     	}
     }
 
-    var css_248z$d = ".bottom-scrollbar-visible.svelte-iysj96{padding-bottom:17px}.sg-table.svelte-iysj96{overflow-x:auto;display:flex;flex-direction:column}.sg-table-scroller.svelte-iysj96{width:100%;border-bottom:1px solid #efefef;overflow-y:hidden}.sg-table-header.svelte-iysj96{display:flex;align-items:stretch;overflow:hidden;border-bottom:#efefef 1px solid;background-color:#fbfbfb}.sg-table-body.svelte-iysj96{display:flex;flex:1 1 0;width:100%;overflow-y:hidden}.sg-table-header-cell.svelte-iysj96{font-size:14px;font-weight:400}.sg-table-cell{white-space:nowrap;overflow:hidden;display:flex;align-items:center;flex-shrink:0;padding:0 .5em;height:100%}.sg-table-cell:last-child{flex-grow:1}";
+    var css_248z$d = ".bottom-scrollbar-visible.svelte-87uanl{padding-bottom:17px}.sg-table.svelte-87uanl{overflow-x:auto;display:flex;flex-direction:column}.sg-table-scroller.svelte-87uanl{width:100%;border-bottom:1px solid #efefef;overflow-y:hidden}.sg-table-header.svelte-87uanl{display:flex;align-items:stretch;overflow:hidden;border-bottom:#efefef 1px solid;background-color:#fbfbfb}.sg-table-body.svelte-87uanl{display:flex;flex:1 1 0;width:100%;overflow-y:hidden}.sg-table-header-cell.svelte-87uanl{font-size:14px;font-weight:400}.sg-table-cell{white-space:nowrap;overflow:hidden;display:flex;align-items:center;flex-shrink:0;padding:0 .5em;height:100%}.sg-table-cell:last-child{flex-grow:1}";
     styleInject(css_248z$d);
 
-    /* src\modules\table\Table.svelte generated by Svelte v3.23.0 */
+    /* src\modules\table\Table.svelte generated by Svelte v3.46.4 */
 
     function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -13546,7 +13580,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (99:8) {#each tableHeaders as header}
+    // (97:8) {#each tableHeaders as header}
     function create_each_block_1$1$1(ctx) {
     	let div;
     	let t0_value = /*header*/ ctx[33].title + "";
@@ -13558,7 +13592,7 @@ var app = (function () {
     			div = element("div");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr(div, "class", "sg-table-header-cell sg-table-cell svelte-iysj96");
+    			attr(div, "class", "sg-table-header-cell sg-table-cell svelte-87uanl");
     			set_style(div, "width", /*header*/ ctx[33].width + "px");
     		},
     		m(target, anchor) {
@@ -13579,11 +13613,12 @@ var app = (function () {
     	};
     }
 
-    // (109:16) {#each visibleRows as row}
+    // (107:16) {#each visibleRows as row}
     function create_each_block$4(ctx) {
+    	let tablerow;
     	let current;
 
-    	const tablerow = new TableRow({
+    	tablerow = new TableRow({
     			props: {
     				row: /*row*/ ctx[30],
     				headers: /*tableHeaders*/ ctx[5]
@@ -13668,16 +13703,16 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr(div0, "class", "sg-table-header svelte-iysj96");
+    			attr(div0, "class", "sg-table-header svelte-87uanl");
     			set_style(div0, "height", /*$headerHeight*/ ctx[8] + "px");
-    			attr(div1, "class", "sg-table-rows svelte-iysj96");
+    			attr(div1, "class", "sg-table-rows svelte-87uanl");
     			set_style(div1, "padding-top", /*paddingTop*/ ctx[1] + "px");
     			set_style(div1, "padding-bottom", /*paddingBottom*/ ctx[2] + "px");
     			set_style(div1, "height", /*rowContainerHeight*/ ctx[3] + "px");
-    			attr(div2, "class", "sg-table-scroller svelte-iysj96");
-    			attr(div3, "class", "sg-table-body svelte-iysj96");
+    			attr(div2, "class", "sg-table-scroller svelte-87uanl");
+    			attr(div3, "class", "sg-table-body svelte-87uanl");
     			toggle_class(div3, "bottom-scrollbar-visible", /*bottomScrollbarVisible*/ ctx[7]);
-    			attr(div4, "class", "sg-table sg-view svelte-iysj96");
+    			attr(div4, "class", "sg-table sg-view svelte-87uanl");
     			set_style(div4, "width", /*tableWidth*/ ctx[0] + "px");
     		},
     		m(target, anchor) {
@@ -13688,7 +13723,7 @@ var app = (function () {
     				each_blocks_1[i].m(div0, null);
     			}
 
-    			/*div0_binding*/ ctx[29](div0);
+    			/*div0_binding*/ ctx[20](div0);
     			append(div4, t);
     			append(div4, div3);
     			append(div3, div2);
@@ -13801,7 +13836,7 @@ var app = (function () {
     		d(detaching) {
     			if (detaching) detach(div4);
     			destroy_each(each_blocks_1, detaching);
-    			/*div0_binding*/ ctx[29](null);
+    			/*div0_binding*/ ctx[20](null);
     			destroy_each(each_blocks, detaching);
     			mounted = false;
     			dispose();
@@ -13824,18 +13859,16 @@ var app = (function () {
     }
 
     function instance$b($$self, $$props, $$invalidate) {
+    	let $visibleWidth;
+    	let $width;
+    	let $rowPadding;
+    	let $taskStore;
     	let $rowStore;
     	let $rowHeight;
-    	let $taskStore;
-    	let $rowPadding;
-    	let $width;
-    	let $visibleWidth;
     	let $headerHeight;
-    	component_subscribe($$self, rowStore, $$value => $$invalidate(18, $rowStore = $$value));
-    	component_subscribe($$self, taskStore, $$value => $$invalidate(20, $taskStore = $$value));
+    	component_subscribe($$self, taskStore, $$value => $$invalidate(22, $taskStore = $$value));
+    	component_subscribe($$self, rowStore, $$value => $$invalidate(23, $rowStore = $$value));
     	const dispatch = createEventDispatcher();
-    	
-    	
     	let { tableWidth } = $$props;
     	let { paddingTop } = $$props;
     	let { paddingBottom } = $$props;
@@ -13844,25 +13877,25 @@ var app = (function () {
 
     	let { tableHeaders = [
     		{
-    			title: "Name",
-    			property: "label",
+    			title: 'Name',
+    			property: 'label',
     			width: 100
     		}
     	] } = $$props;
 
-    	const { from, to, width, visibleWidth, headerHeight } = getContext("dimensions");
-    	component_subscribe($$self, width, value => $$invalidate(22, $width = value));
-    	component_subscribe($$self, visibleWidth, value => $$invalidate(23, $visibleWidth = value));
+    	const { from, to, width, visibleWidth, headerHeight } = getContext('dimensions');
+    	component_subscribe($$self, width, value => $$invalidate(19, $width = value));
+    	component_subscribe($$self, visibleWidth, value => $$invalidate(18, $visibleWidth = value));
     	component_subscribe($$self, headerHeight, value => $$invalidate(8, $headerHeight = value));
-    	const { rowPadding, rowHeight } = getContext("options");
+    	const { rowPadding, rowHeight } = getContext('options');
     	component_subscribe($$self, rowPadding, value => $$invalidate(21, $rowPadding = value));
-    	component_subscribe($$self, rowHeight, value => $$invalidate(19, $rowHeight = value));
+    	component_subscribe($$self, rowHeight, value => $$invalidate(24, $rowHeight = value));
 
     	onMount(() => {
-    		dispatch("init", { module: this });
+    		dispatch('init', { module: this });
     	});
 
-    	const { scrollables } = getContext("gantt");
+    	const { scrollables } = getContext('gantt');
     	let headerContainer;
 
     	function scrollListener(node) {
@@ -13918,18 +13951,19 @@ var app = (function () {
     	let bottomScrollbarVisible;
 
     	function div0_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(6, headerContainer = $$value);
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			headerContainer = $$value;
+    			$$invalidate(6, headerContainer);
     		});
     	}
 
-    	$$self.$set = $$props => {
-    		if ("tableWidth" in $$props) $$invalidate(0, tableWidth = $$props.tableWidth);
-    		if ("paddingTop" in $$props) $$invalidate(1, paddingTop = $$props.paddingTop);
-    		if ("paddingBottom" in $$props) $$invalidate(2, paddingBottom = $$props.paddingBottom);
-    		if ("rowContainerHeight" in $$props) $$invalidate(3, rowContainerHeight = $$props.rowContainerHeight);
-    		if ("visibleRows" in $$props) $$invalidate(4, visibleRows = $$props.visibleRows);
-    		if ("tableHeaders" in $$props) $$invalidate(5, tableHeaders = $$props.tableHeaders);
+    	$$self.$$set = $$props => {
+    		if ('tableWidth' in $$props) $$invalidate(0, tableWidth = $$props.tableWidth);
+    		if ('paddingTop' in $$props) $$invalidate(1, paddingTop = $$props.paddingTop);
+    		if ('paddingBottom' in $$props) $$invalidate(2, paddingBottom = $$props.paddingBottom);
+    		if ('rowContainerHeight' in $$props) $$invalidate(3, rowContainerHeight = $$props.rowContainerHeight);
+    		if ('visibleRows' in $$props) $$invalidate(4, visibleRows = $$props.visibleRows);
+    		if ('tableHeaders' in $$props) $$invalidate(5, tableHeaders = $$props.tableHeaders);
     	};
 
     	$$self.$$.update = () => {
@@ -13945,7 +13979,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*$width, $visibleWidth, scrollWidth, tableWidth*/ 12713985) {
+    		if ($$self.$$.dirty[0] & /*$width, $visibleWidth, scrollWidth, tableWidth*/ 917505) {
     			 {
     				$$invalidate(7, bottomScrollbarVisible = $width > $visibleWidth && scrollWidth <= tableWidth);
     			}
@@ -13971,17 +14005,8 @@ var app = (function () {
     		onRowExpanded,
     		onRowCollapsed,
     		scrollWidth,
-    		$rowStore,
-    		$rowHeight,
-    		$taskStore,
-    		$rowPadding,
-    		$width,
     		$visibleWidth,
-    		dispatch,
-    		from,
-    		to,
-    		scrollables,
-    		updateYPositions,
+    		$width,
     		div0_binding
     	];
     }
@@ -14004,6 +14029,7 @@ var app = (function () {
     				visibleRows: 4,
     				tableHeaders: 5
     			},
+    			null,
     			[-1, -1]
     		);
     	}
@@ -14011,10 +14037,10 @@ var app = (function () {
 
     var SvelteGanttTable = Table;
 
-    var css_248z$e = ".arrow.svelte-5u2c1l{position:absolute;left:0px;pointer-events:none}.select-area.svelte-5u2c1l{pointer-events:visible;position:absolute}";
+    var css_248z$e = ".arrow.svelte-1uk268y{position:absolute;left:0px;pointer-events:none}.select-area.svelte-1uk268y{pointer-events:visible;position:absolute}";
     styleInject(css_248z$e);
 
-    /* src\modules\dependencies\Arrow.svelte generated by Svelte v3.23.0 */
+    /* src\modules\dependencies\Arrow.svelte generated by Svelte v3.46.4 */
 
     function create_fragment$c(ctx) {
     	let svg;
@@ -14030,12 +14056,12 @@ var app = (function () {
     			attr(path0, "stroke", /*stroke*/ ctx[0]);
     			attr(path0, "stroke-width", /*strokeWidth*/ ctx[1]);
     			attr(path0, "fill", "transparent");
-    			attr(path0, "class", "select-area svelte-5u2c1l");
+    			attr(path0, "class", "select-area svelte-1uk268y");
     			attr(path1, "d", /*arrowPath*/ ctx[3]);
     			attr(path1, "fill", /*stroke*/ ctx[0]);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "shape-rendering", "crispEdges");
-    			attr(svg, "class", "arrow svelte-5u2c1l");
+    			attr(svg, "class", "arrow svelte-1uk268y");
     			attr(svg, "height", "100%");
     			attr(svg, "width", "100%");
     		},
@@ -14080,7 +14106,7 @@ var app = (function () {
     	let { startX } = $$props;
     	let { minLen = 12 } = $$props;
     	let { arrowSize = 5 } = $$props;
-    	let { stroke = "red" } = $$props;
+    	let { stroke = 'red' } = $$props;
     	let { strokeWidth = 2 } = $$props;
 
     	onMount(() => {
@@ -14092,15 +14118,15 @@ var app = (function () {
     	let path;
     	let arrowPath;
 
-    	$$self.$set = $$props => {
-    		if ("startY" in $$props) $$invalidate(4, startY = $$props.startY);
-    		if ("endY" in $$props) $$invalidate(5, endY = $$props.endY);
-    		if ("endX" in $$props) $$invalidate(6, endX = $$props.endX);
-    		if ("startX" in $$props) $$invalidate(7, startX = $$props.startX);
-    		if ("minLen" in $$props) $$invalidate(8, minLen = $$props.minLen);
-    		if ("arrowSize" in $$props) $$invalidate(9, arrowSize = $$props.arrowSize);
-    		if ("stroke" in $$props) $$invalidate(0, stroke = $$props.stroke);
-    		if ("strokeWidth" in $$props) $$invalidate(1, strokeWidth = $$props.strokeWidth);
+    	$$self.$$set = $$props => {
+    		if ('startY' in $$props) $$invalidate(4, startY = $$props.startY);
+    		if ('endY' in $$props) $$invalidate(5, endY = $$props.endY);
+    		if ('endX' in $$props) $$invalidate(6, endX = $$props.endX);
+    		if ('startX' in $$props) $$invalidate(7, startX = $$props.startX);
+    		if ('minLen' in $$props) $$invalidate(8, minLen = $$props.minLen);
+    		if ('arrowSize' in $$props) $$invalidate(9, arrowSize = $$props.arrowSize);
+    		if ('stroke' in $$props) $$invalidate(0, stroke = $$props.stroke);
+    		if ('strokeWidth' in $$props) $$invalidate(1, strokeWidth = $$props.strokeWidth);
     	};
 
     	$$self.$$.update = () => {
@@ -14114,7 +14140,7 @@ var app = (function () {
 
     		if ($$self.$$.dirty & /*startX, minLen, endX, startY, endY, height, width*/ 3568) {
     			 {
-    				if (startX == NaN || startX == undefined) $$invalidate(2, path = "M0 0");
+    				if (startX == NaN || startX == undefined) $$invalidate(2, path = 'M0 0');
     				let result;
 
     				if (startX + minLen >= endX && startY != endY) {
@@ -14134,7 +14160,7 @@ var app = (function () {
 
     		if ($$self.$$.dirty & /*endX, arrowSize, endY*/ 608) {
     			 {
-    				if (endX == NaN || endX == undefined) $$invalidate(3, arrowPath = "M0 0");
+    				if (endX == NaN || endX == undefined) $$invalidate(3, arrowPath = 'M0 0');
     				$$invalidate(3, arrowPath = `M${endX - arrowSize} ${endY - arrowSize} L${endX} ${endY} L${endX - arrowSize} ${endY + arrowSize} Z`);
     			}
     		}
@@ -14150,7 +14176,9 @@ var app = (function () {
     		endX,
     		startX,
     		minLen,
-    		arrowSize
+    		arrowSize,
+    		height,
+    		width
     	];
     }
 
@@ -14171,16 +14199,17 @@ var app = (function () {
     	}
     }
 
-    var css_248z$f = ".sg-dependency.svelte-fnf1gz{position:absolute;width:100%;height:100%}";
+    var css_248z$f = ".sg-dependency.svelte-741ycn{position:absolute;width:100%;height:100%}";
     styleInject(css_248z$f);
 
-    /* src\modules\dependencies\Dependency.svelte generated by Svelte v3.23.0 */
+    /* src\modules\dependencies\Dependency.svelte generated by Svelte v3.46.4 */
 
     function create_fragment$d(ctx) {
     	let div;
+    	let arrow;
     	let current;
 
-    	const arrow = new Arrow({
+    	arrow = new Arrow({
     			props: {
     				startX: /*fromTask*/ ctx[1].left + /*fromTask*/ ctx[1].width,
     				startY: /*fromTask*/ ctx[1].top + /*fromTask*/ ctx[1].height / 2,
@@ -14193,7 +14222,7 @@ var app = (function () {
     		c() {
     			div = element("div");
     			create_component(arrow.$$.fragment);
-    			attr(div, "class", "sg-dependency svelte-fnf1gz");
+    			attr(div, "class", "sg-dependency svelte-741ycn");
     			set_style(div, "left", "0");
     			set_style(div, "top", "0");
     			attr(div, "data-dependency-id", /*id*/ ctx[0]);
@@ -14240,10 +14269,10 @@ var app = (function () {
     	let fromTask;
     	let toTask;
 
-    	$$self.$set = $$props => {
-    		if ("id" in $$props) $$invalidate(0, id = $$props.id);
-    		if ("fromId" in $$props) $$invalidate(3, fromId = $$props.fromId);
-    		if ("toId" in $$props) $$invalidate(4, toId = $$props.toId);
+    	$$self.$$set = $$props => {
+    		if ('id' in $$props) $$invalidate(0, id = $$props.id);
+    		if ('fromId' in $$props) $$invalidate(3, fromId = $$props.fromId);
+    		if ('toId' in $$props) $$invalidate(4, toId = $$props.toId);
     	};
 
     	$$self.$$.update = () => {
@@ -14256,7 +14285,7 @@ var app = (function () {
     		}
     	};
 
-    	return [id, fromTask, toTask, fromId, toId];
+    	return [id, fromTask, toTask, fromId, toId, $taskStore];
     }
 
     class Dependency extends SvelteComponent {
@@ -14266,10 +14295,10 @@ var app = (function () {
     	}
     }
 
-    var css_248z$g = ".dependency-container.svelte-hatx0f{position:absolute;width:100%;height:100%;pointer-events:none;top:0;float:left;overflow:hidden;z-index:0}";
+    var css_248z$g = ".dependency-container.svelte-50yf7x{position:absolute;width:100%;height:100%;pointer-events:none;top:0;float:left;overflow:hidden;z-index:0}";
     styleInject(css_248z$g);
 
-    /* src\modules\dependencies\GanttDependencies.svelte generated by Svelte v3.23.0 */
+    /* src\modules\dependencies\GanttDependencies.svelte generated by Svelte v3.46.4 */
 
     function get_each_context$5(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -14280,6 +14309,7 @@ var app = (function () {
     // (26:4) {#each visibleDependencies as dependency (dependency.id)}
     function create_each_block$5(key_1, ctx) {
     	let first;
+    	let dependency;
     	let current;
     	const dependency_spread_levels = [/*dependency*/ ctx[6]];
     	let dependency_props = {};
@@ -14288,7 +14318,7 @@ var app = (function () {
     		dependency_props = assign(dependency_props, dependency_spread_levels[i]);
     	}
 
-    	const dependency = new Dependency({ props: dependency_props });
+    	dependency = new Dependency({ props: dependency_props });
 
     	return {
     		key: key_1,
@@ -14303,7 +14333,9 @@ var app = (function () {
     			mount_component(dependency, target, anchor);
     			current = true;
     		},
-    		p(ctx, dirty) {
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
+
     			const dependency_changes = (dirty & /*visibleDependencies*/ 1)
     			? get_spread_update(dependency_spread_levels, [get_spread_object(/*dependency*/ ctx[6])])
     			: {};
@@ -14348,7 +14380,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr(div, "class", "dependency-container svelte-hatx0f");
+    			attr(div, "class", "dependency-container svelte-50yf7x");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
@@ -14361,7 +14393,7 @@ var app = (function () {
     		},
     		p(ctx, [dirty]) {
     			if (dirty & /*visibleDependencies*/ 1) {
-    				const each_value = /*visibleDependencies*/ ctx[0];
+    				each_value = /*visibleDependencies*/ ctx[0];
     				group_outros();
     				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div, outro_and_destroy_block, create_each_block$5, null, get_each_context$5);
     				check_outros();
@@ -14394,18 +14426,18 @@ var app = (function () {
     }
 
     function instance$e($$self, $$props, $$invalidate) {
-    	let $taskStore;
     	let $visibleHeight;
-    	component_subscribe($$self, taskStore, $$value => $$invalidate(4, $taskStore = $$value));
-    	const { visibleHeight } = getContext("dimensions");
-    	component_subscribe($$self, visibleHeight, value => $$invalidate(5, $visibleHeight = value));
+    	let $taskStore;
+    	component_subscribe($$self, taskStore, $$value => $$invalidate(5, $taskStore = $$value));
+    	const { visibleHeight } = getContext('dimensions');
+    	component_subscribe($$self, visibleHeight, value => $$invalidate(4, $visibleHeight = value));
     	let { paddingTop } = $$props;
     	let { dependencies = [] } = $$props;
     	let visibleDependencies = [];
 
-    	$$self.$set = $$props => {
-    		if ("paddingTop" in $$props) $$invalidate(2, paddingTop = $$props.paddingTop);
-    		if ("dependencies" in $$props) $$invalidate(3, dependencies = $$props.dependencies);
+    	$$self.$$set = $$props => {
+    		if ('paddingTop' in $$props) $$invalidate(2, paddingTop = $$props.paddingTop);
+    		if ('dependencies' in $$props) $$invalidate(3, dependencies = $$props.dependencies);
     	};
 
     	$$self.$$.update = () => {
@@ -14429,7 +14461,14 @@ var app = (function () {
     		}
     	};
 
-    	return [visibleDependencies, visibleHeight, paddingTop, dependencies];
+    	return [
+    		visibleDependencies,
+    		visibleHeight,
+    		paddingTop,
+    		dependencies,
+    		$visibleHeight,
+    		$taskStore
+    	];
     }
 
     class GanttDependencies extends SvelteComponent {
@@ -15745,8 +15784,8 @@ var app = (function () {
     }
 
     function instance$3($$self, $$props, $$invalidate) {
-    	const currentStart = time('06:00');
-    	const currentEnd = time('18:00');
+    	const currentStart = new Date(new Date().setDate(new Date().getDate() - 5));
+    	const currentEnd = new Date(new Date().setDate(new Date().getDate() + 400));
     	const colors = ['blue', 'green', 'orange', 'red'];
     	getContext$1('options');
 
@@ -15828,18 +15867,24 @@ var app = (function () {
     	};
 
     	let options = {
+    		fitWidth: false,
+    		columnUnit: 'day',
     		dateAdapter: new MomentSvelteGanttDateAdapter(moment),
     		rows: data.rows,
     		tasks: data.tasks,
     		dependencies: data.dependencies,
     		timeRanges: [],
-    		columnOffset: 15,
-    		magnetOffset: 150,
-    		rowHeight: 52,
-    		rowPadding: 6,
-    		headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'day', format: 'MMMM Do' }],
-    		fitWidth: true,
-    		minWidth: 800,
+    		columnOffset: 1,
+    		magnetUnit: 'day',
+    		magnetOffset: 1,
+    		rowHeight: 20,
+    		rowPadding: 5,
+    		headers: [
+    			{ unit: 'month', format: 'M', sticky: true },
+    			{ unit: 'week', format: 'W', sticky: true },
+    			{ unit: 'day', format: 'D', sticky: true }
+    		], //headers: [{ unit: 'month', format: 'M Y', sticky: true }, { unit: 'week', format: 'w', sticky: true }],
+    		minWidth: 8000,
     		from: currentStart,
     		to: currentEnd,
     		tableHeaders: [
@@ -15850,10 +15895,37 @@ var app = (function () {
     				type: 'tree'
     			}
     		],
-    		tableWidth: 240,
+    		tableWidth: 200,
     		ganttTableModules: [SvelteGanttTable],
-    		ganttBodyModules: [SvelteGanttDependencies]
-    	};
+    		ganttBodyModules: [SvelteGanttDependencies],
+    		taskElementHook: (node, task) => {
+    			let popup;
+
+    			function onHover() {
+    				console.log('[task] hover', task);
+    				popup = createPopup(task, node);
+    			}
+
+    			function onLeave() {
+    				console.log('[task] hover', task);
+
+    				if (popup) {
+    					popup.remove();
+    				}
+    			}
+
+    			node.addEventListener('mouseenter', onHover);
+    			node.addEventListener('mouseleave', onLeave);
+
+    			return {
+    				destroy() {
+    					console.log('[task] destroy');
+    					node.removeEventListener('mouseenter', onHover);
+    					node.removeEventListener('mouseleave', onLeave);
+    				}
+    			};
+    		}
+    	}; // taskContent: (task) => `${task.label} ${task.from.format('HH:mm')}`
 
     	let gantt;
 
@@ -15957,7 +16029,7 @@ var app = (function () {
     	};
     }
 
-    function createPopup(task, node) {
+    function createPopup$1(task, node) {
     	const rect = node.getBoundingClientRect();
     	const div = document.createElement('div');
     	div.className = 'sg-popup';
@@ -16085,7 +16157,7 @@ var app = (function () {
 
     			function onHover() {
     				console.log('[task] hover', task);
-    				popup = createPopup(task, node);
+    				popup = createPopup$1(task, node);
     			}
 
     			function onLeave() {

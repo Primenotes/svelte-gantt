@@ -5,8 +5,8 @@
     import moment from 'moment';
     import GanttOptions from '../components/GanttOptions.svelte';
 
-    const currentStart = time('06:00');
-    const currentEnd = time('18:00');
+    const currentStart = new Date(new Date().setDate(new Date().getDate()-5));
+    const currentEnd = new Date(new Date().setDate(new Date().getDate()+400));
 
     const colors = ['blue', 'green', 'orange','red']
     
@@ -90,24 +90,52 @@
     }
 
     let options = {
+        fitWidth: false,
+        columnUnit: 'day',
         dateAdapter: new MomentSvelteGanttDateAdapter(moment),
         rows: data.rows,
         tasks: data.tasks,
         dependencies: data.dependencies,
         timeRanges: [],
-        columnOffset: 15,
-        magnetOffset: 150,
-        rowHeight: 52,
-        rowPadding: 6,
-        headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'day', format: 'MMMM Do' }],
-        fitWidth: true,
-        minWidth: 800,
+        columnOffset: 1,
+        magnetUnit: 'day',
+        magnetOffset: 1,
+        rowHeight: 20,
+        rowPadding: 5,
+        headers: [{ unit: 'month', format: 'M', sticky: true }, { unit: 'week', format: 'W', sticky: true }, { unit: 'day', format: 'D', sticky: true }], //headers: [{ unit: 'month', format: 'M Y', sticky: true }, { unit: 'week', format: 'w', sticky: true }],
+        minWidth: 8000,
         from: currentStart,
         to: currentEnd,
         tableHeaders: [{ title: 'Label', property: 'label', width: 140, type: 'tree' }],
-        tableWidth: 240,
+        tableWidth: 200,
         ganttTableModules: [SvelteGanttTable],
-        ganttBodyModules: [SvelteGanttDependencies]
+        ganttBodyModules: [SvelteGanttDependencies],
+        taskElementHook: (node, task) => {
+            let popup;
+            function onHover() {
+                console.log('[task] hover', task);
+                popup = createPopup(task, node);
+            }
+
+            function onLeave() {
+                console.log('[task] hover', task);
+                if(popup) {
+                    popup.remove();
+                }
+            }
+
+            node.addEventListener('mouseenter', onHover);
+            node.addEventListener('mouseleave', onLeave);
+
+            return {
+                destroy() {
+                    console.log('[task] destroy');
+                    node.removeEventListener('mouseenter', onHover);
+                    node.removeEventListener('mouseleave', onLeave);
+                }
+            }
+        },
+        // taskContent: (task) => `${task.label} ${task.from.format('HH:mm')}`
     }
 
     let gantt;
